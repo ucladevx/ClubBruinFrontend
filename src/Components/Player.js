@@ -5,73 +5,80 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {Flex, Box} from 'react-three-flex'
 
-let x_position = 0;
-let y_position = 0;
-let movingRight = false;
-let movingLeft = false;
-let movingUp = false;
-let movingDown = false;
 
-export default function Player() {
-    const [playerPosition, setPlayerPosition] = useState();
+export default function Player(props) {
+  // keeps tracks of each individual player's position
+  const playerPosition_x = useRef(props.x_position)
+  const playerPosition_y = useRef(props.y_position)
+  const isMovingRight = useRef(false);
+  const isMovingLeft = useRef(false);
+  const isMovingUp = useRef(false);
+  const isMovingDown = useRef(false);
+  // used to update the position
+  const [playerPosition, setPlayerPosition] = useState();
 
+  // event listeners
+  useEffect(() => {
     window.addEventListener('keydown',function(e){
       switch (e.keyCode) {
         case 39:
-          movingLeft = movingUp = movingDown = false;
-          movingRight=true;
+          isMovingLeft.current = isMovingUp.current = isMovingDown.current = false;
+          isMovingRight.current=true;
           break;
         case 37:
-          movingRight = movingUp = movingDown = false;
-          movingLeft = true;
+          isMovingRight.current = isMovingUp.current = isMovingDown.current = false;
+          isMovingLeft.current = true;
           break;
         case 38:
-          movingRight = movingDown = movingLeft = false;
-          movingUp = true;
+          isMovingRight.current = isMovingLeft.current = isMovingDown.current = false;
+          isMovingUp.current = true;
           break;
         case 40:
-          movingUp = movingRight = movingDown = false;
-          movingDown = true;
+          isMovingRight.current = isMovingUp.current = isMovingLeft.current = false;
+          isMovingDown.current = true;
           break;
           default:
-      }
-    })
-
-      window.addEventListener('keyup', function(e) {
-        switch (e.keyCode) {
-          case 39:
-            movingRight = false;
-            break;
-          case 37:
-            movingLeft = false;
-            break;
-          case 38:
-            movingUp = false;
-            break;
-          case 40:
-            movingDown = false;
-            break;
-          default:
         }
+      })
+  
+    window.addEventListener('keyup', function(e) {
+      switch (e.keyCode) {
+        case 39:
+          isMovingRight.current = false;
+          break;
+        case 37:
+          isMovingLeft.current = false;
+          break;
+        case 38:
+          isMovingUp.current = false;
+          break;
+        case 40:
+          isMovingDown.current = false;
+          break;
+        default:
+          }
+      })
+  
     })
+    // updates player positioning
     useEffect(() => {
-      if (movingRight===true) {
-        x_position+=.01;
+      if (isMovingRight.current===true) {
+        playerPosition_x.current = playerPosition_x.current + .01;
       }
-      else if (movingLeft === true) {
-        x_position-=.01
+      else if (isMovingLeft.current === true) {
+        playerPosition_x.current = playerPosition_x.current - .01;
       }
-      else if (movingUp === true) {
-        y_position+=.03;
+      else if (isMovingUp.current === true) {
+        playerPosition_y.current = playerPosition_y.current + .03;
       }
-      else if (movingDown === true) {
-        y_position-=.03;
+      else if (isMovingDown.current === true) {
+        playerPosition_y.current = playerPosition_y.current - .03;
       }
     })
     const player = useRef();
     useFrame(() => {
       setPlayerPosition({
-        position: { x: x_position * 6, y: y_position * 2 },
+        position: { x: playerPosition_x.current * 6, y: playerPosition_y.current * 2 },
       });
       
     });
@@ -91,7 +98,7 @@ export default function Player() {
           <mesh visible userData={{ test: "player" }} rotation={[0, 0, 0]} position={[0, 0, 0]} castShadow>
       {/* <sphereGeometry attach="geometry" args={[1, 16, 16]} /> */}
       <boxGeometry attach="geometry" args={[1, 1, .00001]} />
-      <meshStandardMaterial color={ 'hotpink' } />
+      <meshStandardMaterial color={ props.color } />
     </mesh>
       </group>
 
