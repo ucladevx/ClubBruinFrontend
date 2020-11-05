@@ -10,68 +10,32 @@ export default function Player(props) {
   // keeps tracks of each individual player's position
   const playerPosition_x = useRef(props.x_position)
   const playerPosition_y = useRef(props.y_position)
-  const isMovingRight = useRef(false);
-  const isMovingLeft = useRef(false);
-  const isMovingUp = useRef(false);
-  const isMovingDown = useRef(false);
-  // used to update the position
+  const isMoving = useRef([]);
   const [playerPosition, setPlayerPosition] = useState();
 
   // event listeners
   useEffect(() => {
     window.addEventListener('keydown',function(e){
-      switch (e.keyCode) {
-        case 39:
-          isMovingLeft.current = isMovingUp.current = isMovingDown.current = false;
-          isMovingRight.current=true;
-          break;
-        case 37:
-          isMovingRight.current = isMovingUp.current = isMovingDown.current = false;
-          isMovingLeft.current = true;
-          break;
-        case 38:
-          isMovingRight.current = isMovingLeft.current = isMovingDown.current = false;
-          isMovingUp.current = true;
-          break;
-        case 40:
-          isMovingRight.current = isMovingUp.current = isMovingLeft.current = false;
-          isMovingDown.current = true;
-          break;
-          default:
-        }
+      isMoving.current[e.keyCode] = true;
       })
   
     window.addEventListener('keyup', function(e) {
-      switch (e.keyCode) {
-        case 39:
-          isMovingRight.current = false;
-          break;
-        case 37:
-          isMovingLeft.current = false;
-          break;
-        case 38:
-          isMovingUp.current = false;
-          break;
-        case 40:
-          isMovingDown.current = false;
-          break;
-        default:
-          }
+      delete isMoving.current[e.keyCode];
       })
   
     })
     // updates player positioning
     useEffect(() => {
-      if (isMovingRight.current===true) {
+      if (isMoving.current[39]) {
         playerPosition_x.current = playerPosition_x.current + .01;
       }
-      else if (isMovingLeft.current === true) {
+      else if (isMoving.current[37]) {
         playerPosition_x.current = playerPosition_x.current - .01;
       }
-      else if (isMovingUp.current === true) {
+      else if (isMoving.current[38]) {
         playerPosition_y.current = playerPosition_y.current + .03;
       }
-      else if (isMovingDown.current === true) {
+      else if (isMoving.current[40]) {
         playerPosition_y.current = playerPosition_y.current - .03;
       }
     })
