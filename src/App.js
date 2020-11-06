@@ -1,42 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import MessageList from './Components/MessageList';
-import SendMessageForm from './Components/SendMessageForm';
-import Title from './Components/Title';
+import ChatApp from './Components/ChatApp';
 
-function App(props) {
-
-  //Fake chats
-  const [messages, setMessages] = useState([
-    {
-      senderId: 'Rick',
-      text: 'We\'re no strangers to love',
-      time: 'Monday'
-    },
-    {
-      senderId: 'Astley',
-      text: 'You know the rules and so do I',
-      time: 'Monday'
-    },
-    {
-      senderId: 'Rick',
-      text: 'A full commitment\'s what I\'m thinking of',
-      time: 'Tuesday'
-    }
-  ]);
-
-  const addMessage = message => {
-    setMessages([...messages, message]);
-  }
-
-
-
+function App() {
   return (
     <div className="app">
-      <Title />
-      <MessageList messages={messages}/>
-      <SendMessageForm onSubmit={addMessage}/>
-
+      <ChatApp />
     </div>
   );
 }
