@@ -1,23 +1,42 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import MessageList from './Components/MessageList';
+import SendMessageForm from './Components/SendMessageForm';
+import Title from './Components/Title';
 
-function App() {
+function App(props) {
+
+  //Fake chats
+  const [messages, setMessages] = useState([
+    {
+      senderId: 'Rick',
+      text: 'We\'re no strangers to love',
+      time: 'Monday'
+    },
+    {
+      senderId: 'Astley',
+      text: 'You know the rules and so do I',
+      time: 'Monday'
+    },
+    {
+      senderId: 'Rick',
+      text: 'A full commitment\'s what I\'m thinking of',
+      time: 'Tuesday'
+    }
+  ]);
+
+  const addMessage = message => {
+    setMessages([...messages, message]);
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Title />
+      <MessageList messages={messages}/>
+      <SendMessageForm onSubmit={addMessage}/>
+
     </div>
   );
 }
