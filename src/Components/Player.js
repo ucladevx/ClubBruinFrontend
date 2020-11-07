@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {Flex, Box} from 'react-three-flex'
+import walk1 from '../Sprites/walk1.png'
+import { HTML, HTMLProps } from 'drei';
 
 
 export default function Player(props) {
@@ -57,14 +59,13 @@ export default function Player(props) {
     <Suspense fallback={<div>Loading... </div>}>
 </Suspense>
 
+
     return (
-      <group ref={player}>
-          <mesh visible userData={{ test: "player" }} rotation={[0, 0, 0]} position={[0, 0, 0]} castShadow>
-      {/* <sphereGeometry attach="geometry" args={[1, 16, 16]} /> */}
-      <boxGeometry attach="geometry" args={[1, 1, .00001]} />
-      <meshStandardMaterial color={ props.color } />
-    </mesh>
-      </group>
+    <group ref={player}>
+    <HTML>
+      <img src={walk1} alt="earth" className="character"></img>
+    </HTML>
+    </group>
 
     );
   
