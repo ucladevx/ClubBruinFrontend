@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import Title from './Title';
+import connect from 'socket.io-client'
+// import io from 'socket.io'
 
 function ChatApp(props){
     //Fake chats
+    // let socket;
+  const [socket, setSocket] = useState();
   const [messages, setMessages] = useState([
     {
       senderId: 'Rick',
@@ -23,7 +27,19 @@ function ChatApp(props){
     }
   ]);
 
+  useEffect(() => {
+    setSocket(connect('http://localhost:3333'))
+    return () => socket&&socket.disconnect();
+  }, [])
+
+  useEffect(() => {
+    socket&&socket.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
+  }, [socket])
+
   const addMessage = message => {
+    // console.log(socket)
+
+    socket.emit('chat message', message.text)
     setMessages([...messages, message]);
   }
 
