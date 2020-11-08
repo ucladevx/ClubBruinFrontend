@@ -6,6 +6,7 @@ import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {Flex, Box} from 'react-three-flex'
 import walk1 from '../Sprites/walk1.png'
 import { HTML, HTMLProps } from 'drei';
+import Location from './Location';
 
 
 export default function Player(props) {
@@ -14,6 +15,8 @@ export default function Player(props) {
   const playerPosition_y = useRef(props.y_position)
   const isMoving = useRef([]);
   const [playerPosition, setPlayerPosition] = useState();
+
+  const player = useRef();
 
   // event listeners
   useEffect(() => {
@@ -41,7 +44,7 @@ export default function Player(props) {
         playerPosition_y.current = playerPosition_y.current - .03;
       }
     })
-    const player = useRef();
+
     useFrame(() => {
       setPlayerPosition({
         position: { x: playerPosition_x.current * 6, y: playerPosition_y.current * 2 },
@@ -55,16 +58,16 @@ export default function Player(props) {
       player.current.position.x = playerPosition.position.x;
     });
   
-  
-    <Suspense fallback={<div>Loading... </div>}>
-</Suspense>
-
+    <Suspense fallback={<div>Loading... </div>}/>
 
     return (
-    <group ref={player}>
-    <HTML>
-      <img src={walk1} alt="earth" className="character"></img>
-    </HTML>
+    <group>
+      <Location x_position={0} y_position={0} player={player}/>
+      <group ref={player}>
+        <HTML>
+          <img src={walk1} alt="earth" className="character" width='40'></img>
+        </HTML>
+      </group>
     </group>
 
     );
