@@ -6,12 +6,11 @@ COPY package.json /app/server
 
 RUN npm install
 
-RUN npm build
-
-COPY src /app/server/src
-COPY public /app/server/public
+#COPY src /app/server/src
+#COPY public /app/server/public
+COPY build /app/server/build
 COPY server.js /app/server
 
-RUN npm run build
+#RUN npm run build
 
 CMD ["node", "server"]%
