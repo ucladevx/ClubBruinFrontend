@@ -23,7 +23,7 @@ function MessageList(props){
         <div className="message-list">
             {props.messages.map((message, index) => {
                 return (
-                    <Message key={index} username={message.senderId} text={message.text} time={message.time}/>
+                    <Message key={index} username={message.name} text={message.text} time={message.time}/>
 
                 );
             })}

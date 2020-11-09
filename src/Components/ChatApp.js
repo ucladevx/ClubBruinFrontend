@@ -6,28 +6,28 @@ import connect from 'socket.io-client'
 // import io from 'socket.io'
 
 function ChatApp(props){
-    //Fake chats
-    // let socket;
   const [socket, setSocket] = useState();
+  const [name, setName] = useState();
   const [messages, setMessages] = useState([
-    {
-      senderId: 'Rick',
-      text: 'We\'re no strangers to love',
-      time: 'Monday'
-    },
-    {
-      senderId: 'Astley',
-      text: 'You know the rules and so do I',
-      time: 'Monday'
-    },
-    {
-      senderId: 'Rick',
-      text: 'A full commitment\'s what I\'m thinking of',
-      time: 'Tuesday'
-    }
+    // {
+    //   senderId: 'Rick',
+    //   text: 'We\'re no strangers to love',
+    //   time: 'Monday'
+    // },
+    // {
+    //   senderId: 'Astley',
+    //   text: 'You know the rules and so do I',
+    //   time: 'Monday'
+    // },
+    // {
+    //   senderId: 'Rick',
+    //   text: 'A full commitment\'s what I\'m thinking of',
+    //   time: 'Tuesday'
+    // }
   ]);
 
   useEffect(() => {
+    setName('name' + Math.floor(Math.random()*1000))
     setSocket(connect('http://localhost:3333'))
     return () => socket&&socket.disconnect();
   }, [])
@@ -37,10 +37,8 @@ function ChatApp(props){
   }, [socket])
 
   const addMessage = message => {
-    // console.log(socket)
-
-    socket.emit('chat message', message.text)
-    setMessages([...messages, message]);
+    socket.emit('chat message', {text: message.text, name: name})
+    setMessages([...messages, {...message, name}]);
   }
 
 

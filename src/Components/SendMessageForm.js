@@ -11,9 +11,8 @@ function SendMessageForm(props) {
     const handleSubmit = e => {
         e.preventDefault();
         props.onSubmit({
-            senderId: 'Me',
             text: message,
-            time: 'Today'
+            time: new Date()
         });
         setMessage('');
     }
