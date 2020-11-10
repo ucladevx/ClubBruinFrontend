@@ -5,7 +5,6 @@ function Home() {
   return (
     <div className='container'>
     <div className="parent">
-      {/* <button onClick = {() => speak()}>Send the mail</button> */}
       <h1 className="header">Interested in beta testing?</h1>
       <form onSubmit={sendEmail}>
         <div>
