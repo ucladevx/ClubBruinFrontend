@@ -27,7 +27,7 @@ before_install:
     - sudo pip install --user virtualenv
     # Create a virtual environment for AWS CLI
     - ls /usr/bin
-    - virtualenv my_py3 --python=/usr/bin/python34
+    - virtualenv my_py3 --python=/usr/bin/python3.5
     - source my_py3/bin/activate
     - pip install --upgrade awscli
     - pip install --upgrade awsebcli
