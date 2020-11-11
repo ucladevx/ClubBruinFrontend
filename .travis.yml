@@ -24,13 +24,13 @@ before_install:
     - sudo apt-get install -y python3.4
     - sudo apt-get install --upgrade -y python-pip
     - sudo apt-get install jq
-    - sudo pip3 install --user virtualenv
+    - sudo pip install --user virtualenv
     # Create a virtual environment for AWS CLI
     - ls /usr/bin
-    - virtualenv my_py3 --python=/usr/bin/python3.4
+    - virtualenv my_py3 --python=/usr/bin/python3.5
     - source my_py3/bin/activate
-    - pip3 install --upgrade awscli
-    - pip3 install --upgrade awsebcli
+    - pip install --upgrade awscli
+    - pip install --upgrade awsebcli
     # Set AWS information
     - aws configure set aws_access_key_id $AWS_ACCESS_KEY
     - aws configure set aws_secret_access_key $AWS_SECRET_KEY
