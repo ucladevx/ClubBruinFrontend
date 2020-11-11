@@ -1,14 +1,44 @@
 language: generic
 sudo: required
+python:
+- "3.4"
+- "pypy-5.3.1"
+
 services:
     - docker
 
 env:
     global:
         - SHA=$(git rev-parse HEAD)
+        - DEPLOYMENT_REGION=us-west-1
+        - DOCKER_REPOSITORY=cb-frontend
+        - IMAGE_NAME=imageName
+        - DEPLOYMENT_BUCKET=elasticbeanstalk-us-west-1-573755250687
+        - APP_NAME=clubbruin
+        - DEPLOYMENT_ENV_NAME=clubbruin-dev
+        - DOCKER_EMAIL=clubbruin@gmail.com
 
 
 before_install:
+    - gem update --system
+    - sudo apt-get install -y python3.4
+    - sudo apt-get install --upgrade -y python-pip
+    - sudo apt-get install jq
+    - sudo pip install --user virtualenv
+    # Create a virtual environment for AWS CLI
+    - virtualenv my_py3 --python=/usr/bin/python3.4
+    - source my_py3/bin/activate
+    - pip install --upgrade awscli
+    - pip install --upgrade awsebcli
+    # Set AWS information
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY
+    - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+    - aws configure set default.region $DEPLOYMENT_REGION
+    - aws configure set metadata_service_timeout 1200
+    - aws configure set metadata_service_num_attempts 3
+    - aws configure list
+
+before_script:
     - docker build -t clubbruin/cb-frontend:$SHA .
 
 script:
@@ -20,16 +50,9 @@ after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
     - docker push clubbruin/cb-frontend:$SHA
+    - if [ "$TRAVIS_BRANCH" == "main" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+        docker tag $IMAGE_NAME $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID; 
+        docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID;
+        ./scripts/upload_image_to_elastcbeanstalk.sh $TRAVIS_BUILD_ID $DEPLOYMENT_BUCKET $DEPLOYMENT_ENV $APP_NAME $DEPLOYMENT_REGION $IMAGE_NAME $DEPLOYMENT_ENV_NAME $DOCKER_USERNAME $DOCKER_REPOSITORY $DOCKER_PASSWORD $DOCKER_EMAIL;
+        fi
 
-deploy:
-    edge: true
-    provider: elasticbeanstalk
-    region: us-west-1
-    app: clubbruin
-    env: clubbruin-dev
-    bucket_name: elasticbeanstalk-us-west-1-573755250687
-    bucket_path: clubbruin
-    on:
-        branch: main
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
