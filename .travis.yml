@@ -26,6 +26,7 @@ before_install:
     - sudo apt-get install jq
     - sudo pip3 install --user virtualenv
     # Create a virtual environment for AWS CLI
+    - ls /usr/bin
     - virtualenv my_py3 --python=/usr/bin/python3.4
     - source my_py3/bin/activate
     - pip3 install --upgrade awscli
