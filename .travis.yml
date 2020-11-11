@@ -3,18 +3,22 @@ sudo: required
 services:
     - docker
 
+env:
+    - SHA=$(git rev-parse HEAD)
+
+
 before_install:
-    - docker build -t clubbruin/cb-frontend .
+    - docker build -t clubbruin/cb-frontend:$SHA .
 
 script:
     - docker run -e CI=true clubbruin/cb-frontend npm test
 
 after_success:
-    - docker build -t clubbruin/cb-frontend .
+    - docker build -t clubbruin/cb-frontend:$SHA .
     # Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
-    - docker push clubbruin/cb-frontend
+    - docker push clubbruin/cb-frontend:$SHA
 
 deploy:
     edge: true
@@ -28,4 +32,3 @@ deploy:
         branch: main
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-        
