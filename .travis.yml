@@ -4,7 +4,8 @@ services:
     - docker
 
 env:
-    - SHA=$(git rev-parse HEAD)
+    global:
+        - SHA=$(git rev-parse HEAD)
 
 
 before_install:
