@@ -1,4 +1,4 @@
-import React, { useRef, useState, Suspense, useEffect, useKeyPress } from "react";
+import React, { useRef, useState, Suspense, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -7,6 +7,7 @@ import {Flex, Box} from 'react-three-flex'
 import walk1 from '../Sprites/walk1.png'
 import { HTML, HTMLProps } from 'drei';
 import Location from './Location';
+import { PositionContext } from '../App';
 
 
 export default function Player(props) {
@@ -17,6 +18,10 @@ export default function Player(props) {
   const [playerPosition, setPlayerPosition] = useState();
 
   const player = useRef();
+  // state for if a player is at a location
+  const [hovered, setHovered] = useState(false); 
+  
+  const location = useContext(PositionContext);
 
   // event listeners
   useEffect(() => {
@@ -57,6 +62,13 @@ export default function Player(props) {
       player.current.position.y = playerPosition.position.y;
       player.current.position.x = playerPosition.position.x;
     });
+
+    // check if player is at the house and alter state accordingly
+    useFrame(() => {
+      (player.current.position.x > location.x - 1 && player.current.position.x < location.x + 1) 
+      && (player.current.position.y > location.y - 1 && player.current.position.y < location.y + 1) ? 
+      setHovered(true) : setHovered(false);
+    });
   
     <Suspense fallback={<div>Loading... </div>}/>
 
@@ -65,7 +77,7 @@ export default function Player(props) {
       <Location x_position={0} y_position={0} player={player}/>
       <group ref={player}>
         <HTML>
-          <img src={walk1} alt="earth" className="character" width='40'></img>
+          <img src={walk1} alt="earth" className="character" width={hovered ? 100:40}></img>
         </HTML>
       </group>
     </group>
