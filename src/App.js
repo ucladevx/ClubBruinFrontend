@@ -5,6 +5,7 @@ import { Html } from 'drei';
 import './App.css'
 import Clownfish from './Sprites/clownfish.gif'
 import Fish from './Components/GameComponents/Fish'
+import Rod from './Components/GameComponents/Rod'
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <div className="map">
     <Canvas camera={{ position: [0, 0, 20] }}>
       <Fish pointCount={100}/>
+      <Rod />
   </Canvas>
     </div>
   )
