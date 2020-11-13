@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { mockComponent } from 'react-dom/test-utils';
 
 function SendMessageForm(props) {
 
@@ -12,7 +13,7 @@ function SendMessageForm(props) {
         e.preventDefault();
         props.onSubmit({
             text: message,
-            time: new Date()
+            time: new Date().getMonth()+1 +'/'+ new Date().getDate() +'/'+ new Date().getFullYear() +' '+ new Date().getHours() +':'+ new Date().getMinutes()
         });
         setMessage('');
     }
