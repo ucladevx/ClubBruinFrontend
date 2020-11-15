@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="map">
     <Canvas camera={{ position: [0, 0, 20] }}>
-      <Fish pointCount={100}/>
+      <Fish pointCount={50}/>
       <Rod />
   </Canvas>
     </div>
