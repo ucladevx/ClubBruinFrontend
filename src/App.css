@@ -4,11 +4,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: skyblue;
   /* -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
   background-size: cover; */
 }
+
 
 .character {
   width: 40px;
