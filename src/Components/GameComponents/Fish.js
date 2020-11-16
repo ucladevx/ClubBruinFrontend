@@ -1,21 +1,38 @@
 import React, { useMemo, useRef, useEffect, useState } from "react"
 import ReactDOM from "react-dom"
-import { Canvas, extend, useFrame, useThree } from "react-three-fiber"
+import { Canvas, extend, useFrame, useThree, useLoader } from "react-three-fiber"
 import { Html } from 'drei';
+import { HTML } from 'drei';
 import '../../App.css'
 import Clownfish from '../../Sprites/clownfish.gif'
 import * as THREE from 'three';
+import { ImageLoader } from "three";
+import Bear from '../../Sprites/walk1.png'
+import { useSpring, animated as anim } from 'react-spring/three'
  
  
 function Fish({ pointCount }) {
  
 //  const dummy = new THREE.Object3D();
+
+// const texture = useLoader(THREE.TextureLoader, Bear);
+
 var fishObj = {};
-for (let i = 0; i < 50; i++) {
+
+for (let i = 0; i < pointCount; i++) {
   fishObj[i] = {x: Math.random() * 50, y: Math.random() * 50};
 }
 
 const [fish, setPosition] = useState(fishObj);
+
+// useEffect(() => {
+//   for (let i = 0; i < pointCount; i++) {
+//     fishObj[i] = {x: Math.random() * 50, y: Math.random() * 50};
+//   }  
+  
+// })
+
+// const [fish, setPosition] = useState(fishObj);
  
 
 useFrame((state) => {
@@ -28,15 +45,10 @@ useFrame((state) => {
   
 })
 
-let fn = ((state) => {
-  let fishObj = {};
-for (let i = 0; i < pointCount; i++) {
-  fishObj[i] = {x: Math.random() * 50, y: Math.random() * 50};
-}
 
-  setPosition(fishObj)
-})
+// const texture = new THREE.TextureLoader().load('../../Sprites/walk1.png');
 
+const texture = useLoader(THREE.TextureLoader, Bear)
 return (
   <>
 
@@ -53,24 +65,46 @@ return (
   //     metalness={0.1}
   //   />
   // </Html>
-  <mesh visible userData={{ test: "hello" }} position={[fish[key].x, fish[key].y, 0]} castShadow>
-  <sphereGeometry attach="geometry" args={[1, 16, 16]} />
-  <meshStandardMaterial
-    attach="material"
-    color="white"
-    transparent
-    roughness={0.1}
-    metalness={0.1}
-  />
-</mesh>
+  <mesh position={[fish[key].x, fish[key].y, 0]}>
+      <planeBufferGeometry attach="geometry" args={[2, 2]} />
+      <meshBasicMaterial attach="material" map={texture} toneMapped={false} />
+  </mesh>
+//   <mesh visible userData={{ test: "hello" }} position={[fish[key].x, fish[key].y, 0]} castShadow>
+//   <sphereGeometry attach="geometry" args={[1, 16, 16]} />
+//   <meshStandardMaterial
+//     attach="material"
+//     color="white"
+//     transparent
+//     roughness={0.1}
+//     metalness={0.1}
+//   />
+// </mesh>
 
 
     )
   }
-  <Html>
-  <button onClick ={fn}> hi</button>
-  </Html>
   </>
+)
+
+
+
+
+// const texture = useMemo(() => {
+//     const loader = new THREE.TextureLoader();
+//     const fishie = loader.load(Bear);
+
+// }, [Bear])
+
+
+// const [texture] = useLoader(THREE.ImageLoader, [Bear]);
+
+// const [texture1, texture2] = useLoader(THREE.ImageLoader, ['../../Sprites/walk1.png', '../../Sprites/walk1.png'])
+
+return (
+      <mesh>
+      <planeBufferGeometry attach="geometry" args={[4, 4]} />
+      <meshBasicMaterial attach="material" map={texture} toneMapped={false} />
+    </mesh>
 )
 
 
@@ -113,5 +147,3 @@ return (
 }
  
 export default Fish;
- 
-

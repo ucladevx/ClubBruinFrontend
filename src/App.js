@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useEffect, useState } from "react"
+import React, { useMemo, useRef, useEffect, useState, Suspense } from "react"
 import ReactDOM from "react-dom"
 import { Canvas, extend, useFrame, useThree } from "react-three-fiber"
 import { Html } from 'drei';
@@ -12,7 +12,9 @@ function App() {
   return (
     <div className="map">
     <Canvas camera={{ position: [0, 0, 20] }}>
-      <Fish pointCount={50}/>
+      <Suspense fallback={null}>
+      <Fish pointCount={100}/>
+      </Suspense>
       <Rod />
   </Canvas>
     </div>
