@@ -9,15 +9,17 @@ import {
 import Home from './Components/Home'
 import FishGame from './Components/FishGame'
 import Map from './Components/Map'
+import Login from './Components/Login'
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
         <div>
         <Switch>
-            <Route exact path="/" component={Home} />
+            {/* <Route exact path="/" component={Home} /> */}
             <Route exact path="/fishgame" component={FishGame} />
             <Route exact path="/map" component={Map} />
+            <Route exact path="/login" component={Login} />
         </Switch>
         </div>
     </Router>

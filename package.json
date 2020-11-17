@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.2.0",
     "colyseus.js": "^0.14.1",
     "drei": "^1.5.7",
+    "axios": "^0.21.0",
     "emailjs": "^3.3.0",
     "emailjs-com": "^2.6.3",
     "express": "^4.17.1",
