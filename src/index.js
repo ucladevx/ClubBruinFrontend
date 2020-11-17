@@ -7,6 +7,7 @@ import {
     Route
   } from "react-router-dom";import reportWebVitals from './reportWebVitals';
 import Home from './Components/Home'
+import Login from './Components/Login'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
         <div>
         <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
         </Switch>
         </div>
     </Router>
