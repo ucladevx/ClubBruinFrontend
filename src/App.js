@@ -13,9 +13,11 @@ function App() {
     <div className="map">
     <Canvas camera={{ position: [0, 0, 20] }}>
       <Suspense fallback={null}>
-      <Fish pointCount={100}/>
-      </Suspense>
       <Rod />
+      </Suspense>
+      {/* <Suspense fallback={null}>
+      <Fish pointCount={5} rod={Rod.rod}/>
+      </Suspense> */}
   </Canvas>
     </div>
   )

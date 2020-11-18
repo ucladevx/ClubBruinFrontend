@@ -1,47 +1,34 @@
-import React, { useRef, useEffect } from "react"
-import { useFrame } from "react-three-fiber"
+import React, { useRef, useEffect, Suspense, useState } from "react"
+import { Canvas, useFrame, useLoader } from "react-three-fiber"
 import { Html } from 'drei';
 import '../../App.css'
 import Hook from '../../Sprites/hook.png'
+import Fish from './Fish'
+import * as THREE from 'three';
 
 function Rod() {
-    const rod = useRef();
-    // mouse click triggers casting line
-    var mouseClicked = false;
-    // determines whether or not the line needs to return after its cast
-    var isReturningToInitial = false;
 
-    // may have to change how we do initial positioning because I'm not sure it's consistent across screen sizes
-    useEffect(() => {rod.current.position.set(0,30,0)})
+    const [xPos, setxPos] = useState(0);
+    const [yPos, setyPos] = useState(0)
 
-    // DON'T REALLY FEEL TOO GREAT ABOUT ALL THESE IF STATEMENTS IN USEFRAME
     useFrame(({mouse}) => {
-        if (!mouseClicked && !isReturningToInitial) {
-            if (rod.current.position.x + mouse.x < 30 && rod.current.position.x + mouse.x > -30) {
-                rod.current.position.x += mouse.x;
-            }
-        }
-        else if (mouseClicked && !isReturningToInitial){
-            rod.current.position.y -= .25;
-        }
-        else {
-            if (rod.current.position.y < 30) {
-                rod.current.position.y += .25;
-            }
-            else {isReturningToInitial=false}
-        }
+        setxPos(xPos + (mouse.x / 2))
+        setyPos(yPos + (mouse.y / 2))
     })
 
-    document.addEventListener("mousedown", () => {mouseClicked=true;isReturningToInitial=false})
-    document.addEventListener("mouseup", () => {isReturningToInitial=true;mouseClicked=false})
 
+    const texture = useLoader(THREE.TextureLoader, Hook)
 
     return (
-        <group ref={rod}>
-        <Html>
-            <img src={Hook} alt="hook"></img>
-        </Html>
-      </group>
+        <>
+        <Suspense fallback={null}>
+        <Fish x={xPos} y={yPos} pointCount={50}/>
+        </Suspense>
+        <mesh position={[xPos,yPos,0]}>
+      <planeBufferGeometry attach="geometry" args={[3, 30]} />
+      <meshBasicMaterial attach="material" map={texture} toneMapped={false} />
+        </mesh>
+    </>
       )
 }
 
