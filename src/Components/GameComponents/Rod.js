@@ -10,12 +10,12 @@ import HookNoRod from '../../Sprites/justhook.png'
 function Rod() {
 
     const [xPos, setxPos] = useState(0);
-    const [yPos, setyPos] = useState(5)
+    const [yPos, setyPos] = useState(25)
 
     // NOT SURE HOW THESE CONSTRAINTS TRANSFER ACROSS DIFFERENT SCREEN SIZES
     useFrame(({mouse}) => {
-      if (xPos + mouse.x <= 30 && xPos + mouse.x >= -30) {setxPos(xPos + (mouse.x / 2))};
-      if (yPos + mouse.y <= 25 && yPos + mouse.y >= 2) {setyPos(yPos + (mouse.y / 2))}
+      if (xPos + mouse.x <= 30 && xPos + mouse.x >= -30 && yPos >= 22) {setxPos(xPos + (mouse.x / 4))};
+      if (yPos + mouse.y <= 25 && yPos + mouse.y >= 2) {setyPos(yPos + (mouse.y / 4))}
     })
 
 
@@ -25,7 +25,7 @@ function Rod() {
     return (
         <>
         <Suspense fallback={null}>
-        <Fish x={xPos} y={yPos} pointCount={10}/>
+        <Fish x={xPos} y={yPos} pointCount={30}/>
         </Suspense>
         <mesh position={[xPos,yPos,0]}>
       <planeBufferGeometry attach="geometry" args={[3, 30]} />
