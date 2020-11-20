@@ -33,7 +33,7 @@ useFrame(({mouse}) => {
   let fishObj = {};
   for (let i = 0; i < pointCount; i++) {
     fishObj[i] = {x: fish[i].x -  0.25, y: fish[i].y};
-    if ((Math.abs(fishObj[i].x - (x)) < 2) && (Math.abs(fishObj[i].y - (y)) < 2)) {
+    if ((Math.abs(fishObj[i].x - (x)) < 2) && (Math.abs(fishObj[i].y - (y-12)) < 2)) {
       document.addEventListener("mousedown", (e) => {if (e.which === 1) {(fishObj[i].x = 1000)}})}
       // (fishObj[i].x = 1000)}
   }
