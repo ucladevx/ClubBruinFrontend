@@ -40,19 +40,31 @@ before_install:
     - aws configure list
 
 before_script:
-    - docker build -t clubbruin/cb-frontend:$SHA .
+    - docker build -t clubbruin/cb-frontend:$TRAVIS_BUILD_ID .
+    - docker build -t clubbruin/cb-frontend:latest .
 
 script:
     - docker run -e CI=true clubbruin/cb-frontend npm test
 
 after_success:
-    - docker build -t clubbruin/cb-frontend:$SHA .
+    # - docker build -t clubbruin/cb-frontend:$TRAVIS_BUILD_ID .
     # Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
-    - docker push clubbruin/cb-frontend:$SHA
-    - if [ "$TRAVIS_BRANCH" == "main" ]; then docker tag $IMAGE_NAME $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID; 
-        docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID;
-        ./scripts/upload_image_to_elastcbeanstalk.sh $TRAVIS_BUILD_ID $DEPLOYMENT_BUCKET $DEPLOYMENT_ENV $APP_NAME $DEPLOYMENT_REGION $IMAGE_NAME $DEPLOYMENT_ENV_NAME $DOCKER_USERNAME $DOCKER_REPOSITORY $DOCKER_PASSWORD $DOCKER_EMAIL;
-        fi
+    - docker push clubbruin/cb-frontend:$TRAVIS_BUILD_ID
+    - if [ "$TRAVIS_BRANCH" == "main" ]; 
+      then 
+        docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:latest;
+        ls -a
+        eb use clubbruin-dev;
+        eb deploy;
+#         aws elasticbeanstalk create-application-version
+# --application-name clubbruin
+# --version-label $TRAVIS_BUILD_ID;
+# aws elasticbeanstalk update-environment \
+#   --environment-id $EB_ENV \
+#   --environment-name $DEPLOYMENT_ENV_NAME \
+#   --application-name $APP_NAME \
+#   --version-label $TRAVIS_BUILD_ID;
+      fi
 
