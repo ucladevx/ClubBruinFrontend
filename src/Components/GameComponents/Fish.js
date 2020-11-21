@@ -24,7 +24,7 @@ function generateStartingPosition() {
 var fishObj = {};
 
 for (let i = 0; i < pointCount; i++) {
-  fishObj[i] = {x: Math.random() * 250, y: generateStartingPosition()};
+  fishObj[i] = {x: Math.random() * 400, y: generateStartingPosition()};
 }
 
 const [fish, setPosition] = useState(fishObj);
@@ -34,8 +34,9 @@ useFrame(({mouse}) => {
 
   let fishObj = {};
   for (let i = 0; i < pointCount; i++) {
-    fishObj[i] = {x: fish[i].x -  0.15, y: fish[i].y};
-    if ((Math.abs(fishObj[i].x - (x+1)) < 1) && (Math.abs(fishObj[i].y - (y-12)) < 1)) {
+    fishObj[i] = {x: fish[i].x -  0.25, y: fish[i].y};
+    if ((Math.abs(fishObj[i].x - (x)) < 2.25) && (Math.abs(fishObj[i].y - (y)) < 2.25)) {
+      // EVENT LISTENER COMMENTED OUT FOR NOW BECAUSE OF WEIRD BUGS
       // document.addEventListener("mousedown", (e) => {
         fishObj[i].y = -1000;
         setScore(score+1);
@@ -46,14 +47,14 @@ useFrame(({mouse}) => {
 })
 
 
-const texture = useLoader(THREE.TextureLoader, Bear)
+const texture = useLoader(THREE.TextureLoader, Clownfish)
 return (
   <>
   <Suspense fallback={null}>
   {
     Object.keys(fish).map(key => 
   <mesh position={[fish[key].x, fish[key].y, 0]}>
-      <planeBufferGeometry attach="geometry" args={[2, 2]} />
+      <planeBufferGeometry attach="geometry" args={[2.5, 1.75]} />
       <meshBasicMaterial attach="material" map={texture} toneMapped={false} />
   </mesh>
 
@@ -61,7 +62,6 @@ return (
   }
   </Suspense>
 
-{/* <Score score={score}/> */}
 <Html>
   <div style={{ marginLeft:'70vh', marginTop:'-50%' }}>
   <h1>SCORE:{score}</h1>
