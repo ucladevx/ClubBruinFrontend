@@ -4,9 +4,6 @@ import '../../App.css'
 import Clownfish from '../../Sprites/clownfish.gif'
 import * as THREE from 'three';
 import {Html} from 'drei'
-import Bear from '../../Sprites/walk1.png'
-import Rod from './Rod'
-import Hook from '../../Sprites/hook.png'
  
  
 function Fish({ pointCount, x, y }) {
