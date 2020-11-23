@@ -2,6 +2,20 @@ html {
   background-color: black;
 }
 
+.map {
+  background-image: url('./Sprites/underwater.gif');
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: skyblue; */
+  /* -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; */
+}
+
+
 .formStyling {
   width: 25%;
   height: 35px;
