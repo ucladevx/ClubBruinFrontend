@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, Suspense, useState } from "react"
 import { Canvas, useFrame, useLoader } from "react-three-fiber"
 import { Html } from 'drei';
-import '../../App.css'
+import './index.css'
 import Fish from './Fish'
 import * as THREE from 'three';
 import hookNoLine from '../../Sprites/hookNoLine.png'

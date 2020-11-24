@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, Suspense } from "react"
 import { useFrame, useLoader } from "react-three-fiber"
-import '../../App.css'
+import './index.css'
 import Clownfish from '../../Sprites/clownfish.gif'
 import * as THREE from 'three';
 import {Html} from 'drei'
