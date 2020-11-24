@@ -12,7 +12,7 @@ env:
         - SHA=$(git rev-parse HEAD)
         - DEPLOYMENT_REGION=us-west-1
         - DOCKER_REPOSITORY=cb-frontend
-        - IMAGE_NAME=imageName
+        - IMAGE_NAME=image-name
         - DEPLOYMENT_BUCKET=elasticbeanstalk-us-west-1-573755250687
         - APP_NAME=clubbruin
         - DEPLOYMENT_ENV_NAME=clubbruin-dev
@@ -40,20 +40,23 @@ before_install:
     - aws configure list
 
 before_script:
-    - docker build -t clubbruin/cb-frontend:$SHA .
+    - docker build -t clubbruin/cb-frontend:$TRAVIS_BUILD_ID .
+    - docker build -t clubbruin/cb-frontend:latest .
 
 script:
     - docker run -e CI=true clubbruin/cb-frontend npm test
 
 after_success:
-    - docker build -t clubbruin/cb-frontend:$SHA .
+    # - docker build -t clubbruin/cb-frontend:$TRAVIS_BUILD_ID .
     # Log in to the docker CLI
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     # Take those images and push them to docker hub
-    - docker push clubbruin/cb-frontend:$SHA
-    - if [ "$TRAVIS_BRANCH" == "main" ]; then docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-        docker tag $IMAGE_NAME $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID; 
-        docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:$TRAVIS_BUILD_ID;
-        ./scripts/upload_image_to_elastcbeanstalk.sh $TRAVIS_BUILD_ID $DEPLOYMENT_BUCKET $DEPLOYMENT_ENV $APP_NAME $DEPLOYMENT_REGION $IMAGE_NAME $DEPLOYMENT_ENV_NAME $DOCKER_USERNAME $DOCKER_REPOSITORY $DOCKER_PASSWORD $DOCKER_EMAIL;
-        fi
+    - docker push clubbruin/cb-frontend:$TRAVIS_BUILD_ID
+    - if [ "$TRAVIS_BRANCH" == "main" ]; 
+      then 
+        docker push $DOCKER_USERNAME/$DOCKER_REPOSITORY:latest;
+        ls -a
+        eb use clubbruin-dev;
+        eb deploy;
+      fi
 
