@@ -1,9 +1,15 @@
-export default function BackDrop() {
+import RoyceHall from '../Images/Royce_mockup.svg';
+import { HTML } from 'drei';
+
+const Background = () => {
+    
     return (
-      <mesh receiveShadow position={[0, -1, -5]}>
-        <planeBufferGeometry attach="geometry" args={[500, 500]} />
-        <meshStandardMaterial attach="material" color="white" />
-      </mesh>
+        <group>
+            <HTML>
+                <img src={RoyceHall} alt="royce" />
+            </HTML>
+        </group>
     );
-  }
-  
+}
+
+export default Background;

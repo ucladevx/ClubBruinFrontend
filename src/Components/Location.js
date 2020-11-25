@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useFrame } from 'react-three-fiber';
 import house from '../Sprites/house.png'
 import { HTML, HTMLProps } from 'drei';
-import { PositionContext } from '../App';
+import { PositionContext } from './Scene';
 
 const Location = () => {
     const location = useRef();
