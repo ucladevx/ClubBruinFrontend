@@ -21,7 +21,7 @@ function generateStartingPosition() {
 var fishObj = {};
 
 for (let i = 0; i < pointCount; i++) {
-  fishObj[i] = {x: Math.random() * 400, y: generateStartingPosition()};
+  fishObj[i] = {x: Math.random() * 400, y: generateStartingPosition(), speed: Math.abs(Math.cos(i)) / 3};
 }
 
 const [fish, setPosition] = useState(fishObj);
@@ -29,18 +29,19 @@ const [fish, setPosition] = useState(fishObj);
 
 useFrame(({mouse}) => {
 
-  let fishObj = {};
+  let fishObj_ = {};
   for (let i = 0; i < pointCount; i++) {
-    fishObj[i] = {x: fish[i].x -  0.25, y: fish[i].y};
-    if ((Math.abs(fishObj[i].x - (x)) < 2.25) && (Math.abs(fishObj[i].y - (y)) < 2.25)) {
+    let speed = fishObj[i].speed;
+    fishObj_[i] = {x: fish[i].x -  speed, y: fish[i].y, speed: speed};
+    if ((Math.abs(fishObj_[i].x - (x)) < 2.25) && (Math.abs(fishObj_[i].y - (y)) < 2.25)) {
       // EVENT LISTENER COMMENTED OUT FOR NOW BECAUSE OF WEIRD BUGS
       // document.addEventListener("mousedown", (e) => {
-        fishObj[i].y = -1000;
+        fishObj_[i].y = -1000;
         setScore(score+1);
       // })
     }
   }
-    setPosition(fishObj)
+    setPosition(fishObj_)
 })
 
 

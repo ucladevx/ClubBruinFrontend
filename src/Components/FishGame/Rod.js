@@ -7,15 +7,22 @@ import * as THREE from 'three';
 import hookNoLine from '../../Sprites/hookNoLine.png'
 
 
+
 function Rod() {
+
+  // const limits = window.screen.width / 65
+  var limits
+  const size = window.screen.width;
+
+  var lim = (window.screen.width / window.screen.height) * 15;
 
     const [xPos, setxPos] = useState(0);
     const [yPos, setyPos] = useState(0)
 
-    // NOT SURE HOW THESE CONSTRAINTS TRANSFER ACROSS DIFFERENT SCREEN SIZES
     useFrame(({mouse}) => {
+      console.log(xPos)
       // console.log(xPos + ": x " + yPos + ": y")
-      if (xPos + mouse.x <= 30 && xPos + mouse.x >= -30 && yPos >= 12) {setxPos(xPos + (mouse.x / 4))};
+      if (xPos + mouse.x <= lim && xPos + mouse.x >= -lim && yPos >= 12) {setxPos(xPos + (mouse.x / 4))};
       if (yPos + mouse.y <= 13 && yPos + mouse.y >= -15) {setyPos(yPos + (mouse.y / 4))}
     })
 
