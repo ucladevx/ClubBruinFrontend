@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function LoginForm(props) {
+function SignupForm(props) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -32,7 +32,7 @@ function LoginForm(props) {
     }
 
     return (
-        <div>
+        <div className="form">
         <form onSubmit={handleSubmit}>
             <input 
                 placeholder='Enter username'
@@ -52,10 +52,10 @@ function LoginForm(props) {
                 onChange={handleEmail}
                 value={email}
             />
-            <input className="submitForm" type='submit' value='Sign up'></input>
+            <div className="submitButton"> <button type='submit'>Sign up</button> </div>
         </form>
         </div>
     )
 }
 
-export default LoginForm
+export default SignupForm
