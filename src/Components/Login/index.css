@@ -1,3 +1,19 @@
+.container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginContainer {
+    background-color: rgb(66, 66, 66);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
 .header {
     color: white;
     font-size: 30px;
@@ -5,25 +21,27 @@
 }
 
 .userSuccess {
+    display: flex;
+    justify-content: center;
     color: green;
     margin: 10px 0px;
 }
 
 .userError {
+    display: flex;
+    justify-content: center;
     color: red;
-    margin: 8px;
+    margin-top: 8px;
 }
 
-.signupArea {
-    background-color: rgb(66, 66, 66);
-    margin: auto;
-    padding: 50px;
-    width: 50%;
-    height: 100%;
+.form {
+    display: flex;
+    justify-content: center;
 }
 
 input {
-    width: 100%;
+    display: flex;
+    flex-direction: column;
     height: 35px;
     background-color: black;
     color: white;
@@ -31,4 +49,22 @@ input {
     border-radius: 5px;
     margin-top: 10px;
     padding: 5px 5px;
+    width: 300px;
+  }
+
+  .submitButton {
+      display: flex;
+      justify-content: center;
+  }
+
+  button {
+    background-color: black;
+    color: white;
+    padding: 5px 5px;
+    margin-top: 10px;
+    height: 38px;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+    width: 275px;
   }

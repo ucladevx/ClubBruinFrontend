@@ -1,81 +1,54 @@
 import React, {useState} from 'react'
-import axios from 'axios'
-import "./index.css"
-import LoginForm from './LoginForm'
+import './index.css'
+import Signin from './Signin'
+import Signup from './Signup'
 
-function Login() {
 
-    /*
-    const [users, setUsers] = useState([])
+function Login(props) {
 
-    const [string, setString] = useState('')
-    const fn = async (usr, pw, email) => {
-        const test =  await axios({
-            method: 'POST',
-            url: 'http://localhost:9000/auth/signup',
-            data:{
-                "username": "User3",
-                "password": "pwd",
-                "email": "emai4l@email.com"
-            }
-        }).then((res) => {
-            return res.data
-        })
-        console.log(test)
-        // setString(test.message)
-    }
-    useEffect(fn, [])
-    // make a form that keeps track of values
-    // function that takes in sername, pwd, and email
-    // calls the backend
-
-    const addUser = user => {
-        setUsers([...users, user])
-    }
-
-    */
-
-    const [string, setString] = useState('')
-    const fn = async({username, password, email}) => {
-        console.log(username)
-        const test = await axios({
-            method: 'POST',
-            url: 'http://localhost:9000/auth/signup',
-            data:{
-                "username": username,
-                "password": password,
-                "email": email
-            }
-        })
-        .then((res) => {
-            return res.data
-        })
-        setString(test.message)
-        console.log(test.message)
-        //Created user
-    }
+    const [isSignin, setIsSignin] = useState(true)
+    const [loggedIn, setLoggedIn] = useState(false)
     
+    const clickSignin = () => {
+        setIsSignin(true)
+    }
 
+    const clickSignup = () => {
+        setIsSignin(false)
+    }
+
+    const loginbool = (loggedInBool) => {
+        setLoggedIn(loggedInBool)
+    }
 
 
 
     return (
-        
-        <div className="signupArea">
-            <div className="header">Sign Up:</div>
-
-            <LoginForm helper={fn}/>
+        <div className="container">
             
-            {string.substring(0, 17)==='Signup successful' || string===''? 
-            <div>{string && <div className="userSuccess">{string}</div>}</div> : 
-            <div>{string && <div className="userError">{string}</div>}</div>}
+            {/* Right now the "home page" is just text, but I assume later that when the user
+            logs in successfully, they will be taken to an actual home page instead of staying 
+            on the login page */}
 
-            {/*
-                bool? true: false
-                
-            */}
+
+            {loggedIn? <div className="header">home</div> :
             
+            <div>
+                <div className="loginContainer">
+                    {isSignin? <Signin helper={loginbool}/> : <Signup />}
+
+                    <div>
+                        {isSignin?
+                        <button onClick={clickSignup}>Don't have an account? Sign up!</button> : 
+                        <button onClick={clickSignin}>Already have an account? Sign in!</button>}
+                    </div>
+
+                </div>
+            </div>
+            }
+
         </div>
+                    
         
     )
 }
