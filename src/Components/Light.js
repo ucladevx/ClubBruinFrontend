@@ -1,4 +1,6 @@
-export default function Light({ brightness, color }) {
+import { AmbientLight } from "three";
+
+export default function Light( {color, brightness} ) {
     return (
       <rectAreaLight
         width={1000}
@@ -10,6 +12,7 @@ export default function Light({ brightness, color }) {
         penumbra={1}
         castShadow
       />
+      // <AmbientLight color={0x404040} intensity={1} />
     );
   }
   

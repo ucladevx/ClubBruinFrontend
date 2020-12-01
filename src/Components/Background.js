@@ -1,15 +1,15 @@
-import RoyceHall from '../Images/Royce_mockup.svg';
-import { HTML } from 'drei';
+import * as THREE from 'three';
+import RoyceHall from '../Images/Royce_mockup.svg'
 
-const Background = () => {
-    
-    return (
-        <group>
-            <HTML>
-                <img src={RoyceHall} alt="royce" />
-            </HTML>
-        </group>
-    );
+export default function Background() {
+  // const renderer = new THREE.WebGLRenderer();
+  const texture = new THREE.TextureLoader().load(RoyceHall);
+  // texture.anisotropy = renderer.getMaxAnisotropy();
+  return (
+    <mesh>
+      <boxGeometry attach="geometry" args={[13, 6.5]} />
+      <meshStandardMaterial attach="material" args={{ map: texture }} />
+    </mesh>
+  );
 }
-
-export default Background;
+  

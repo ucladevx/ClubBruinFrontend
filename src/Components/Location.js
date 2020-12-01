@@ -19,10 +19,10 @@ const Location = () => {
     // house becomes huge when player is at the house
     return (
         <group ref={location}>
-           <HTML>
-           <img src={house} alt="earth" className="location"></img>
-           </HTML>
-       </group>
+            <HTML>
+            <img src={house} alt="earth" className="location"></img>
+            </HTML>
+        </group>
     );
 }
 
