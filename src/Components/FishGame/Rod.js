@@ -20,7 +20,6 @@ function Rod() {
     const [yPos, setyPos] = useState(0)
 
     useFrame(({mouse}) => {
-      console.log(xPos)
       // console.log(xPos + ": x " + yPos + ": y")
       if (xPos + mouse.x <= lim && xPos + mouse.x >= -lim && yPos >= 12) {setxPos(xPos + (mouse.x / 4))};
       if (yPos + mouse.y <= 13 && yPos + mouse.y >= -15) {setyPos(yPos + (mouse.y / 4))}

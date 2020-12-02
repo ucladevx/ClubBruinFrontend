@@ -11,6 +11,8 @@ function FishGame() {
     return (
       <div className="map">
       <Canvas camera={{ position: [0, 0, 20] }}>
+      <directionalLight position={[10, 10, 5]} intensity={0.5} />
+     <directionalLight position={[-10, -10, -5]} intensity={0.5} />
         <Suspense fallback={null}>
         <Rod />
         </Suspense>
