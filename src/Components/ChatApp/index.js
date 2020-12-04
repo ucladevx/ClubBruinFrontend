@@ -44,7 +44,7 @@ function ChatApp(props){
 
 
   return (
-    <div>
+    <div className="container"> 
       <Title />
       <MessageList messages={messages}/>
       <SendMessageForm onSubmit={addMessage}/>
