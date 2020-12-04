@@ -14,9 +14,6 @@ function Fish({ pointCount, x, y }) {
   const hybopsis = useLoader(GLTFLoader, '/models/another.glb')
 
 
-  const fish_ = useLoader(GLTFLoader, '/models/shark.glb')
-
-
   const [score, setScore] = useState(0)
 
 function generateStartingPosition() {
@@ -31,7 +28,7 @@ function getFishType(index) {
     return scene
   }
 
-  if (index % 5 == 0) {
+  else if (index % 5 == 0) {
     return shark
   }
 
@@ -44,7 +41,7 @@ function getGeometry(type) {
   }
 
   else if (type === hybopsis) {
-    console.log(type)
+    // console.log(type)
     return type.scene.children[2].children[1].geometry
   }
 
@@ -82,7 +79,7 @@ function rotationFactor(type) {
     return [-199, 0, null]
   }
   else {
-    return [1.7, null, 1.3]
+    return [1.7, null, 1.8]
   }
 }
 
@@ -114,7 +111,10 @@ useFrame(({mouse}) => {
     let geometry = fishObj[i].geometry
     let material = fishObj[i].material
     let scaleFactor = fishObj[i].scaleFactor
-    let rotationFactor = fishObj[i].rotationFactor
+    let rotationFactor = fishObj[i].rotationFactor;
+    if (type === shark || type === hybopsis) {
+      rotationFactor[2] -= .15
+    }
     fishObj_[i] = {x: fish[i].x -  speed, y: fish[i].y, speed: speed, type: type, geometry: geometry, material: material, scaleFactor: scaleFactor, rotationFactor: rotationFactor};
     if ((Math.abs(fishObj_[i].x - (x)) < 2.25) && (Math.abs(fishObj_[i].y - (y)) < 2.25)) {
         fishObj_[i].y = -1000;
