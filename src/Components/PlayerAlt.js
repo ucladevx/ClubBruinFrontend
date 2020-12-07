@@ -18,8 +18,12 @@ export default function PlayerAlt(props) {
   const playerPosition_y = useRef(0)
   const isMoving = useRef([]);
   const [playerPosition, setPlayerPosition] = useState();
+  const [players, setPlayers] = useState({
+  
+  });
+  const [username, _] = useState('user' + Math.random() * 100);
+  // console.log(players)
 
-  const player = useRef();
   // state for if a player is at a location
   const [hovered, setHovered] = useState(false);
   const [atBorder, setAtBorder] = useState(false); 
@@ -27,25 +31,63 @@ export default function PlayerAlt(props) {
   const location = useContext(PositionContext);
 
   useEffect(async () => {
-    console.log(Colyseus);
-    let c = new Colyseus.Client("ws://localhost:2567");
+    // console.log(Colyseus);
+    let c = new Colyseus.Client("ws://localhost:9000");
     setClient(c);
     var room;
-    c.joinOrCreate("map").then(room_instance => {
-        console.log(room_instance.state.players);
+    
+    c.joinOrCreate("map", {
+      username: username
+    }).then(room_instance => {
+        // console.log(room_instance.state.players);
 
         room = room_instance;
+
+        room.state.players.onAdd = function (player, sessionId) {
+          // console.log('player', player)
+          setPlayers((p)=>({
+            ...p,
+            [player.username] : {
+              x: player.x,
+              y: player.y,
+            }
+          }));
+          player.onChange = function (changes) {
+            // console.log('plyer update', player.username)
+            setPlayers((p)=>({
+              ...p,
+              [player.username] : {
+                x: player.x,
+                y: player.y,
+              }
+            }));
+          }
+        }
+
+        room.state.players.onRemove = function (player, sessionId) {
+          setPlayers(p => {
+            console.log(p);
+            let obj = {}
+            Object.keys(p).forEach((key) => {
+                console.log(p);
+                if (player.username !== key){
+                  obj[key] = p[key]
+                }
+              })
+            return obj  
+          })
+        }
 
         window.addEventListener("keydown", function(e) {
           isMoving.current[e.keyCode] = true;
           if (isMoving.current[38]) {
-            room.send("move", { y: -1 });
+            room.send("move", { y: 1 });
           }
           else if (isMoving.current[39]) {
             room.send("move", { x: 1 });
           }
           else if (isMoving.current[40]) {
-            room.send("move", { y: 1 });
+            room.send("move", { y: -1 });
           }
           else if (isMoving.current[37]) {
             room.send("move", { x: -1 });
@@ -60,53 +102,71 @@ export default function PlayerAlt(props) {
   }, [])
 
   // updates player positioning
-  useEffect(() => {
-    if (isMoving.current[39]) {
-      playerPosition_x.current = playerPosition_x.current + 0.1;
-    }
-    else if (isMoving.current[37]) {
-      playerPosition_x.current = playerPosition_x.current - 0.1;
-    }
-    else if (isMoving.current[38]) {
-      playerPosition_y.current = playerPosition_y.current + 0.1;
-    }
-    else if (isMoving.current[40]) {
-      playerPosition_y.current = playerPosition_y.current - 0.1;
+  // useEffect(() => {
+  //   if (isMoving.current[39]) {
+  //     playerPosition_x.current = playerPosition_x.current + 0.1;
+  //   }
+  //   else if (isMoving.current[37]) {
+  //     playerPosition_x.current = playerPosition_x.current - 0.1;
+  //   }
+  //   else if (isMoving.current[38]) {
+  //     playerPosition_y.current = playerPosition_y.current + 0.1;
+  //   }
+  //   else if (isMoving.current[40]) {
+  //     playerPosition_y.current = playerPosition_y.current - 0.1;
+  //   }
+  // });
+
+  // useFrame(() => {
+  //  setPlayers2(players)
+  // })
+
+  // // Update the player's position from the updated state.
+  // useFrame(() => {
+  //   player.current.position.y = playerPosition.position.y;
+  //   player.current.position.x = playerPosition.position.x;
+  //   // console.log(window.devicePixelRatio, 'RATIO');
+  // });
+
+  // // check if player is at the house and alter state accordingly
+  useFrame(() => {
+    if (players[username]) {
+      // console.log(players[username].x);
+      (players[username].x > location.x - 1 && players[username].x  < location.x + 1) 
+      && (players[username].y  > location.y - 1 && players[username].y < location.y + 1) ? 
+      setHovered(true) : setHovered(false);
     }
   });
 
-  useFrame(() => {
-    setPlayerPosition({
-      position: { x: playerPosition_x.current, y: playerPosition_y.current },
-    });
-  })
-
-  // Update the player's position from the updated state.
-  useFrame(() => {
-    player.current.position.y = playerPosition.position.y;
-    player.current.position.x = playerPosition.position.x;
-    // console.log(window.devicePixelRatio, 'RATIO');
-  });
-
-  // check if player is at the house and alter state accordingly
-  useFrame(() => {
-    (player.current.position.x > location.x - 1 && player.current.position.x < location.x + 1) 
-    && (player.current.position.y > location.y - 1 && player.current.position.y < location.y + 1) ? 
-    setHovered(true) : setHovered(false);
-
-    // if (player.current.position.x === 10 || ) {
-    //   setAtBorder(true);
-    // }
-  });
-
-  <Suspense fallback={<div>Loading... </div>}/>
+  // <Suspense fallback={<div>Loading... </div>}/>
 
   return (
-    <group ref={player}>
-        <HTML>
-          <img src={walk1} alt="earth" className="character" width={hovered ? 100:40}></img>
+    // <group position={[0, 0, 0]}>
+        // <HTML>
+        //   <img src={walk1} alt="earth" className="character" width={hovered ? 100:40}></img>
+        // </HTML>
+    // </group>
+
+    <>
+      <Suspense fallback={null}>
+      {
+        // Object.keys(players).map(key =>
+         Object.keys(players).map(key =>
+
+          // <mesh visible
+          //   position={[0, 0, 0]}
+          // >
+          //   <boxGeometry attach="geometry" args={[13, 6.5]} />
+          //   <meshStandardMaterial attach="material" />
+          // </mesh>
+          <HTML position={[players[key].x, players[key].y, 0]}>
+          <img src={walk1} alt="earth" className="character" width={(hovered && key === username) ? 100:40}></img>
         </HTML>
-    </group>
+
+        )
+      }
+      </Suspense>
+    </>
 
   );
   
