@@ -13,6 +13,7 @@ function Fish({ pointCount, x, y }) {
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
   const hybopsis = useLoader(GLTFLoader, '/models/another.glb')
+  const redfish = useLoader(GLTFLoader, '/models/redfish.glb')
 
   const [gameOver, setGameOver] = useState([-100,0,0]);
   const [returnHome, setReturnHome] = useState([-100,0,0])
@@ -27,11 +28,15 @@ function generateStartingPosition() {
 }
 
 function getFishType(index) {
-  if (index % 2 == 0) {
+  if (index % 2 == 0 && index % 7 !== 0 && index % 4 != 0) {
     return scene
   }
 
-  else if (index % 5 == 0) {
+  if (index % 4 === 0) {
+    return redfish;
+  }
+
+  else if (index % 7 == 0) {
     return shark
   }
 
@@ -43,7 +48,13 @@ function getSpeed(type, index) {
     return .35;
   }
   else {
-    return (Math.abs(Math.cos(index)) / 3) + .25;
+    let speed = (Math.abs(Math.cos(index) / 3));
+    if (speed > .25) {
+      return speed;
+    }
+    else {
+      return .25
+    }
   }
 }
 
@@ -54,6 +65,10 @@ function getGeometry(type) {
 
   else if (type === hybopsis) {
     return type.scene.children[2].children[1].geometry
+  }
+
+  else if (type === redfish) {
+    return type.scene.children[4].geometry
   }
 
   else {
@@ -68,6 +83,10 @@ function getMaterial(type) {
 
   else if (type === hybopsis) {
     return type.scene.children[2].children[1].material
+  }
+
+  else if (type === redfish) {
+    return type.scene.children[4].material
   }
 
   else {
