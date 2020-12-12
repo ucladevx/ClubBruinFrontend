@@ -130,6 +130,7 @@ export default function PlayerAlt(props) {
 
   // // check if player is at the house and alter state accordingly
   useFrame(() => {
+    // console.log(players)
     if (players[username]) {
       // console.log(players[username].x);
       (players[username].x > location.x - 1 && players[username].x  < location.x + 1) 
