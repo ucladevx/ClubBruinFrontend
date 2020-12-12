@@ -32,6 +32,7 @@ export const UsernameContext = createContext();
 
 export function Provider({children}){
     const [user, setUser] = useState("boop")
+    console.log(user)
     return (
         <UsernameContext.Provider value = {{
             user, setUser

@@ -10,7 +10,8 @@ import {UsernameContext} from '../../UsernameContext'
 
 function ChatApp(props){
   const [socket, setSocket] = useState();
-  const [name, setName] = useState();
+  // const [name, setName] = useState();
+  // console.log(namename)
   const [messages, setMessages] = useState([
     // {
     //   senderId: 'Rick',
@@ -30,22 +31,25 @@ function ChatApp(props){
   ]);
 
 
-  const loggedUsername = useContext(UsernameContext)
+  const {user} = useContext(UsernameContext)
 
   useEffect(() => {
-    setName(loggedUsername)
+    // setName(user)
     //setName('name' + Math.floor(Math.random()*1000))
-    setSocket(connect('http://localhost:3333'))
+    const s = connect('http://localhost:3333')
+    setSocket(s)
+    s.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
     return () => socket&&socket.disconnect();
   }, [])
 
-  useEffect(() => {
-    socket&&socket.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
-  }, [socket])
+  // useEffect(() => {
+  //   console.log('called use effect')
+  //   socket&&socket.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
+  // }, [socket])
 
   const addMessage = message => {
-    socket.emit('chat message', {text: message.text, name: name})
-    setMessages([...messages, {...message, name}]);
+    socket.emit('chat message', {text: message.text, name: user})
+    setMessages([...messages, {...message, name: user}]);
   }
 
 

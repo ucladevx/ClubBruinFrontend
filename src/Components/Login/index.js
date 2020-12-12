@@ -3,10 +3,12 @@ import './index.css'
 import Signin from './Signin'
 import Signup from './Signup'
 import {UsernameContext} from '../../UsernameContext'
+import { useHistory } from "react-router-dom";
 
 function Login(props) {
-    const {user, setUser} = useContext(UsernameContext)
-    console.log(user)
+    const history = useHistory()
+    // const {user, setUser} = useContext(UsernameContext)
+    // console.log(user)
 
     const [isSignin, setIsSignin] = useState(true)
     const [loggedIn, setLoggedIn] = useState(false)
@@ -23,11 +25,9 @@ function Login(props) {
         setLoggedIn(loggedInBool)
     }
 
-
-
-
     if (loggedIn) {
-        window.location = "/chat"
+        history.push('/chat')
+        // window.location = "/chat"
         return null
     }
 

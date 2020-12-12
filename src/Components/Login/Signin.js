@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import SigninForm from './SigninForm'
-//import {UsernameContext} from '../../UsernameContext'
+import {UsernameContext} from '../../UsernameContext'
 
 function Signin(props) {
 
-    //const {user, setUser} = useContext(UsernameContext)
+    const {user, setUser} = useContext(UsernameContext)
     //console.log(user)
 
     const [string, setString] = useState('')
@@ -19,6 +19,10 @@ function Signin(props) {
             }
         })
         .then((res) => {
+            setUser(res.data.username)
+            props.helper({
+            loggedInBool: true
+            })
             return res.data.message
         })
         .catch((err) => {
@@ -28,11 +32,11 @@ function Signin(props) {
     }
 
 
-    const setLoggedIn = () => {
-        props.helper({
-            loggedInBool: true
-        })
-    }
+    // const setLoggedIn = () => {
+    //     props.helper({
+    //         loggedInBool: true
+    //     })
+    // }
         
 
     return (
@@ -41,7 +45,7 @@ function Signin(props) {
                 <div className="header">Sign In:</div>
                 <SigninForm helper={fn}/>
                 {string.substring(0, 23)==='Successfully logged in.' || string===''? 
-                <div>{string && <div className="userSuccess">{string}{setLoggedIn()}</div>}</div> : 
+                <div>{string && <div className="userSuccess">{string}</div>}</div> : 
                 <div>{string && <div className="userError">{string}</div>}</div>}
             </div>
         </div>
