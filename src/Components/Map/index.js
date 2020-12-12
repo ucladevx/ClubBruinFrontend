@@ -6,7 +6,9 @@ import Scene from './Scene'
 
 export default function Map() {
   return (
-    <Scene/>
+            <div className="map">
+                <Scene/>
+            </div>
   );
 }
 

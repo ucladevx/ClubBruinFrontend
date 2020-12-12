@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {Flex, Box} from 'react-three-flex'
-import walk1 from '../Sprites/walk1.png'
+import walk1 from '../../Sprites/walk1.png'
 import { HTML, HTMLProps } from 'drei';
 import Location from './Location';
 import { PositionContext } from './Scene';

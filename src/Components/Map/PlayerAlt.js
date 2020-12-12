@@ -4,11 +4,12 @@ import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
 import {Flex, Box} from 'react-three-flex'
-import walk1 from '../Sprites/walk1.png'
+import walk1 from '../../Sprites/walk1.png'
 import { HTML, HTMLProps } from 'drei';
 import Location from './Location';
 import { PositionContext } from './Scene';
-import * as Colyseus from '../../node_modules/colyseus.js/dist/colyseus.dev.js';
+import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
+// import * as Colyseus from '../../../node_modules/colyseus.js'
 
 
 export default function PlayerAlt(props) {
@@ -131,12 +132,12 @@ export default function PlayerAlt(props) {
   // // check if player is at the house and alter state accordingly
   useFrame(() => {
     // console.log(players)
-    if (players[username]) {
-      // console.log(players[username].x);
-      (players[username].x > location.x - 1 && players[username].x  < location.x + 1) 
-      && (players[username].y  > location.y - 1 && players[username].y < location.y + 1) ? 
-      setHovered(true) : setHovered(false);
-    }
+    // if (players[username]) {
+    //   // console.log(players[username].x);
+    //   (players[username].x > location.x - 1 && players[username].x  < location.x + 1) 
+    //   && (players[username].y  > location.y - 1 && players[username].y < location.y + 1) ? 
+    //   setHovered(true) : setHovered(false);
+    // }
   });
 
   // <Suspense fallback={<div>Loading... </div>}/>

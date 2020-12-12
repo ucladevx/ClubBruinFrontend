@@ -34,7 +34,7 @@ const Scene = () => {
                     <PlayerAlt current_player={true}/>
                     {/* <GroundPlane /> */}
                     {/* <Background /> */}
-                    <Location />
+                    {/* <Location /> */}
                     </PositionContext.Provider>
                 </Canvas>
             {/* </div> */}

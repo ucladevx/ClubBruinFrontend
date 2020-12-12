@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useFrame } from 'react-three-fiber';
-import house from '../Sprites/house.png'
+import house from '../../Sprites/house.png'
 import { HTML, HTMLProps } from 'drei';
 import { PositionContext } from './Scene';
 

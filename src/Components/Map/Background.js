@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import RoyceHall from '../Images/Royce_mockup.svg'
+import RoyceHall from '../../Images/Royce_mockup.svg'
 
 export default function Background() {
   // const renderer = new THREE.WebGLRenderer();
