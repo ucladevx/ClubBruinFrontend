@@ -1,8 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import SigninForm from './SigninForm'
+//import {UsernameContext} from '../../UsernameContext'
 
 function Signin(props) {
+
+    //const {user, setUser} = useContext(UsernameContext)
+    //console.log(user)
 
     const [string, setString] = useState('')
     const fn = async({username, password}) => {
@@ -21,8 +25,8 @@ function Signin(props) {
             return err})
         // console.log('printing test' + typeof(test.toString()))
         setString(test.toString())
-
     }
+
 
     const setLoggedIn = () => {
         props.helper({
@@ -30,7 +34,6 @@ function Signin(props) {
         })
     }
         
-
 
     return (
         <div>

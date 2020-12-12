@@ -27,18 +27,22 @@ function SigninForm(props) {
         <div className="form">
             <form onSubmit={handleSubmit}>
             <input 
+                className="logininput"
                 placeholder='Enter username'
                 type='text'
                 onChange={handleUsername}
                 value={username}
             />
             <input 
+                className="logininput"
                 placeholder='Enter password'
                 type='password'
                 onChange={handlePassword}
                 value={password}
             />
-            <div className="submitButton"> <button type='submit'>Sign in</button> </div>
+            <div className="submitButton"> 
+                <button type='submit' className="loginbutton">Sign in</button> 
+            </div>
             </form>
         </div>
     )
