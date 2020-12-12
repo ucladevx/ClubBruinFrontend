@@ -35,24 +35,29 @@ function SignupForm(props) {
         <div className="form">
         <form onSubmit={handleSubmit}>
             <input 
+                className="logininput"
                 placeholder='Enter username'
                 type='text'
                 onChange={handleUsername}
                 value={username}
             />
             <input 
+                className="logininput"
                 placeholder='Enter password'
                 type='text'
                 onChange={handlePassword}
                 value={password}
             />
             <input 
+                className="logininput"
                 placeholder='Enter UCLA email'
                 text='text'
                 onChange={handleEmail}
                 value={email}
             />
-            <div className="submitButton"> <button type='submit'>Sign up</button> </div>
+            <div className="submitButton"> 
+                <button type='submit' className="loginbutton">Sign up</button> 
+            </div>
         </form>
         </div>
     )
