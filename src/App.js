@@ -1,11 +1,14 @@
-import React from "react"
+// import React, { useState } from 'react';
+// import './App.css';
+// import Scene from './Components/Scene'
 
 
-function App() {
-  return (
-    <div></div>
-  )
-}
+// // !!CLICK CANVAS TO ADD MORE "PLAYERS"!!
 
 
-export default App;
+// export default function App() {
+//   return (
+//     <Scene/>
+//   );
+// }
+
