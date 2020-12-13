@@ -1,4 +1,4 @@
-import React, { useRef, useState, Suspense, useEffect, useContext } from "react";
+import React, { useRef, useState, Suspense, useEffect, useContext, useMemo } from "react";
 import ReactDOM from "react-dom";
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -23,6 +23,7 @@ export default function PlayerAlt(props) {
   
   });
   const [username, _] = useState('user' + Math.random() * 100);
+
   // console.log(players)
 
   // state for if a player is at a location
@@ -102,6 +103,21 @@ export default function PlayerAlt(props) {
     })
   }, [])
 
+  // function usernameFormat(username) {
+  //   if (username.length <= 6) {
+  //     return 0;
+  //   }
+  //   else if (username.length <= 10) {
+  //     return -6;
+  //   }
+  //   else if (username.length <= 15) {
+  //     return -(username.length * 1.5)
+  //   }
+  //   else {
+  //     return (-username.length * 2.5)
+  //   }
+  // }
+
   // updates player positioning
   // useEffect(() => {
   //   if (isMoving.current[39]) {
@@ -142,12 +158,8 @@ export default function PlayerAlt(props) {
 
   // <Suspense fallback={<div>Loading... </div>}/>
 
+  var usernameLength = props.username.length
   return (
-    // <group position={[0, 0, 0]}>
-        // <HTML>
-        //   <img src={walk1} alt="earth" className="character" width={hovered ? 100:40}></img>
-        // </HTML>
-    // </group>
 
     <>
       <Suspense fallback={null}>
@@ -155,15 +167,13 @@ export default function PlayerAlt(props) {
         // Object.keys(players).map(key =>
          Object.keys(players).map(key =>
 
-          // <mesh visible
-          //   position={[0, 0, 0]}
-          // >
-          //   <boxGeometry attach="geometry" args={[13, 6.5]} />
-          //   <meshStandardMaterial attach="material" />
-          // </mesh>
+          <group>
+
           <HTML position={[players[key].x, players[key].y, 0]}>
-          <img src={walk1} alt="earth" className="character" width={(hovered && key === username) ? 100:40}></img>
+          <p style={{marginLeft: -props.username.length * (props.username.length / 8)}}>{props.username}</p>
+              <img src={walk1} alt="earth" className="character" width={(hovered && key === username) ? 100:40}></img>
         </HTML>
+          </group>
 
         )
       }

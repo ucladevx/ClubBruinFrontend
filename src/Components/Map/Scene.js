@@ -31,7 +31,7 @@ const Scene = () => {
                     <PositionContext.Provider value={location}>
                     <Light />
                     {/* {players} */}
-                    <PlayerAlt current_player={true}/>
+                    <PlayerAlt current_player={true} username={'user'+Math.random()*10}/>
                     {/* <GroundPlane /> */}
                     {/* <Background /> */}
                     {/* <Location /> */}
