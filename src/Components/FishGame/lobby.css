@@ -1,0 +1,63 @@
+.background {
+    background-color: green;
+}
+
+.lobbyContainer {
+    min-height: 100vh;
+    background-color: cornflowerblue;
+}
+
+.topRowContainer {
+    max-height: 5px;
+}
+
+.lobbyBoard {
+    background-color: #202020;
+    width: 600px;
+    height: 700px;
+    border-radius: 6px;
+    margin: auto;
+    margin-top: 5%;
+}
+
+#rooms {
+    padding-left:10px;
+    padding-top:20px; 
+    font-size:20px; 
+    font-weight: 600
+}
+
+.font {
+    color: white;
+    margin-top: -7px;
+}
+
+.separator {
+    height: 3px;
+    width: 100%;
+    background-color: #FFD700;
+    margin-top: -10px;
+}
+
+table {
+    width: 75%;
+}
+
+.tableLabels {
+    color: white;
+    margin-top: 10px;
+    padding-left: 7px;
+}
+
+td {
+    padding-top: 8px;
+}
+
+.rooms {
+    cursor: pointer;
+}
+
+.hoveredRooms {
+    cursor: pointer;
+    background-color: #303030;
+}
