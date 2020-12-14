@@ -7,11 +7,14 @@ import connect from 'socket.io-client'
 import './index.css'
 //import { isCompositeComponentWithType } from 'react-dom/test-utils';
 import {UsernameContext} from '../../UsernameContext'
+import useSocket from 'use-socket.io-client';
 
 function ChatApp(props){
-  const [socket, setSocket] = useState();
+  // const [socket, setSocket] = useState();
   // const [name, setName] = useState();
   // console.log(namename)
+  const [socket] = useSocket('http://localhost:3333');
+
   const [messages, setMessages] = useState([
     // {
     //   senderId: 'Rick',
@@ -36,14 +39,20 @@ function ChatApp(props){
   useEffect(() => {
     // setName(user)
     //setName('name' + Math.floor(Math.random()*1000))
-    const s = connect('http://localhost:3333')
-    setSocket(s)
-    s.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
-    return () => socket&&socket.disconnect();
+    // const s = connect('ws://localhost:3333')
+    // setSocket(s)
+    // console.log(s)
+    socket.on('received', (p)=>{setMessages(m => [...m, p])})
+    // return () => socket&&socket.disconnect();
   }, [])
 
   // useEffect(() => {
   //   console.log('called use effect')
+  //   // console.log(socket&&socket.id)
+    
+  // socket&&socket.on("connect", () => {
+  //   console.log(socket.id); // x8WIv7-mJelg7on_ALbx
+  // });
   //   socket&&socket.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
   // }, [socket])
 

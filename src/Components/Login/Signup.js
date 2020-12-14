@@ -1,8 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import axios from 'axios'
 import SignupForm from './SignupForm'
+import {UsernameContext} from '../../UsernameContext'
+
 
 function Singup() {
+    const {setUser} = useContext(UsernameContext)
 
     const [string, setString] = useState('')
     const fn = async({username, password, email}) => {
@@ -16,6 +19,10 @@ function Singup() {
             }
         })
         .then((res) => {
+            setUser(res.data.username)
+            // props.helper({
+            // loggedInBool: true
+            // })
             return res.data
         })
         setString(test.message)

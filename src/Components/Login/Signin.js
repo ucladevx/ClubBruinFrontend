@@ -5,7 +5,7 @@ import {UsernameContext} from '../../UsernameContext'
 
 function Signin(props) {
 
-    const {user, setUser} = useContext(UsernameContext)
+    const {setUser} = useContext(UsernameContext)
     //console.log(user)
 
     const [string, setString] = useState('')
