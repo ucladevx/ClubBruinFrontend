@@ -6,9 +6,9 @@ import * as THREE from 'three';
 import {Html} from 'drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import GameOverGraphic from '../../Sprites/gameover.png'
+import {useHistory} from 'react-router-dom'
  
- 
-function Fish({ pointCount, x, y }) {
+function Fish({ pointCount, x, y, history }) {
 
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
@@ -131,7 +131,6 @@ for (let i = 0; i < pointCount; i++) {
 
 const [fish, setPosition] = useState(fishObj);
 
-
 useFrame(({mouse}) => {
 
   let fishObj_ = {};
@@ -191,7 +190,7 @@ const gameOverGraphic = useLoader(THREE.TextureLoader, GameOverGraphic)
       <meshBasicMaterial attach="material" map={gameOverGraphic} toneMapped={false} />
   </mesh>
   <Html position={returnHome}>
-      <h1 style={{width:'1000px', cursor:'pointer'}} onClick={()=>{alert("BACK HOME")}}>CLICK TO RETURN HOME</h1>
+      <h1 style={{width:'1000px', cursor:'pointer'}} onClick={()=>{history.push('/map')}}>CLICK TO RETURN HOME</h1>
   </Html>
   
   <Html>

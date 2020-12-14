@@ -24,11 +24,12 @@ ReactDOM.render(
               <Switch>
                   {/* <Route exact path="/" component={Home} /> */}
                   {/* <Route exact path="/login" component={Login} /> */}
+                  
+                  
+                  <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
+                  <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
                   <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
                   <Route exact path="/fishgame" render = {() => <Provider><FishGame></FishGame></Provider>} />
-                  
-                  <Route exact path="/login" render = {() => <Provider><Login></Login></Provider>} />
-                  <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}
               </Switch>
           </div>

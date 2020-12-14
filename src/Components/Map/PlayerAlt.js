@@ -22,7 +22,6 @@ export default function PlayerAlt(props) {
   const [players, setPlayers] = useState({
   
   });
-  const [username, _] = useState('user' + Math.random() * 100);
 
   // console.log(players)
 
@@ -39,7 +38,7 @@ export default function PlayerAlt(props) {
     var room;
     
     c.joinOrCreate("map", {
-      username: username
+      username: props.username
     }).then(room_instance => {
         // console.log(room_instance.state.players);
 
@@ -103,49 +102,6 @@ export default function PlayerAlt(props) {
     })
   }, [])
 
-  // function usernameFormat(username) {
-  //   if (username.length <= 6) {
-  //     return 0;
-  //   }
-  //   else if (username.length <= 10) {
-  //     return -6;
-  //   }
-  //   else if (username.length <= 15) {
-  //     return -(username.length * 1.5)
-  //   }
-  //   else {
-  //     return (-username.length * 2.5)
-  //   }
-  // }
-
-  // updates player positioning
-  // useEffect(() => {
-  //   if (isMoving.current[39]) {
-  //     playerPosition_x.current = playerPosition_x.current + 0.1;
-  //   }
-  //   else if (isMoving.current[37]) {
-  //     playerPosition_x.current = playerPosition_x.current - 0.1;
-  //   }
-  //   else if (isMoving.current[38]) {
-  //     playerPosition_y.current = playerPosition_y.current + 0.1;
-  //   }
-  //   else if (isMoving.current[40]) {
-  //     playerPosition_y.current = playerPosition_y.current - 0.1;
-  //   }
-  // });
-
-  // useFrame(() => {
-  //  setPlayers2(players)
-  // })
-
-  // // Update the player's position from the updated state.
-  // useFrame(() => {
-  //   player.current.position.y = playerPosition.position.y;
-  //   player.current.position.x = playerPosition.position.x;
-  //   // console.log(window.devicePixelRatio, 'RATIO');
-  // });
-
-  // // check if player is at the house and alter state accordingly
   useFrame(() => {
     // console.log(players)
     // if (players[username]) {
@@ -158,7 +114,6 @@ export default function PlayerAlt(props) {
 
   // <Suspense fallback={<div>Loading... </div>}/>
 
-  var usernameLength = props.username.length
   return (
 
     <>
@@ -171,7 +126,7 @@ export default function PlayerAlt(props) {
 
           <HTML position={[players[key].x, players[key].y, 0]}>
           <p style={{marginLeft: -props.username.length * (props.username.length / 8)}}>{props.username}</p>
-              <img src={walk1} alt="earth" className="character" width={(hovered && key === username) ? 100:40}></img>
+              <img src={walk1} alt="earth" className="character" width={(hovered && key === props.username) ? 100:40}></img>
         </HTML>
           </group>
 

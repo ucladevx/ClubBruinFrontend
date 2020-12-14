@@ -11,7 +11,7 @@ import './Scene.css';
 
 export const PositionContext = React.createContext();
 
-const Scene = () => {
+const Scene = ({username}) => {
     const scene = useRef();
     const [players, setPlayers] = useState([<Player color={'hotpink'} x_position={0} y_position={0} current_player={true}/>]);
     const location = {
@@ -31,7 +31,7 @@ const Scene = () => {
                     <PositionContext.Provider value={location}>
                     <Light />
                     {/* {players} */}
-                    <PlayerAlt current_player={true} username={'user'+Math.random()*10}/>
+                    <PlayerAlt current_player={true} username={username}/>
                     {/* <GroundPlane /> */}
                     {/* <Background /> */}
                     {/* <Location /> */}

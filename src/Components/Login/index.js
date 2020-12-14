@@ -2,7 +2,6 @@ import React, {useState, useContext} from 'react'
 import './index.css'
 import Signin from './Signin'
 import Signup from './Signup'
-import {UsernameContext} from '../../UsernameContext'
 import { useHistory } from "react-router-dom";
 
 function Login(props) {
@@ -26,7 +25,7 @@ function Login(props) {
     }
 
     if (loggedIn) {
-        history.push('/chat')
+        history.push('/map')
         // window.location = "/chat"
         return null
     }
