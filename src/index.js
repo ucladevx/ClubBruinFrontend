@@ -8,6 +8,7 @@ import {
   } from "react-router-dom";import reportWebVitals from './reportWebVitals';
 import Home from './Components/Home'
 import FishGame from './Components/FishGame'
+import Game from './Components/FishGame/Game'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/fishgame" component={FishGame} />
+            <Route exact path="/fishgame/id" component={Game}/>
         </Switch>
         </div>
     </Router>
