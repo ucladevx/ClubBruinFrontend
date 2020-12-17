@@ -7,7 +7,6 @@ import connect from 'socket.io-client'
 import './index.css'
 //import { isCompositeComponentWithType } from 'react-dom/test-utils';
 import {UsernameContext} from '../../UsernameContext'
-<<<<<<< HEAD
 import useSocket from 'use-socket.io-client';
 
 function ChatApp(props){
@@ -16,12 +15,6 @@ function ChatApp(props){
   // console.log(namename)
   const [socket] = useSocket('http://localhost:3333');
 
-=======
-
-function ChatApp(props){
-  const [socket, setSocket] = useState();
-  const [name, setName] = useState();
->>>>>>> dfbba6119fcfa0c1c9f2c1e0dcbec06aa364fbca
   const [messages, setMessages] = useState([
     // {
     //   senderId: 'Rick',
@@ -41,7 +34,6 @@ function ChatApp(props){
   ]);
 
 
-<<<<<<< HEAD
   const {user} = useContext(UsernameContext)
 
   useEffect(() => {
@@ -67,24 +59,6 @@ function ChatApp(props){
   const addMessage = message => {
     socket.emit('chat message', {text: message.text, name: user})
     setMessages([...messages, {...message, name: user}]);
-=======
-  const loggedUsername = useContext(UsernameContext)
-
-  useEffect(() => {
-    setName(loggedUsername)
-    //setName('name' + Math.floor(Math.random()*1000))
-    setSocket(connect('http://localhost:3333'))
-    return () => socket&&socket.disconnect();
-  }, [])
-
-  useEffect(() => {
-    socket&&socket.on('received', (p)=>{console.log(p);setMessages(m => [...m, p])})
-  }, [socket])
-
-  const addMessage = message => {
-    socket.emit('chat message', {text: message.text, name: name})
-    setMessages([...messages, {...message, name}]);
->>>>>>> dfbba6119fcfa0c1c9f2c1e0dcbec06aa364fbca
   }
 
 

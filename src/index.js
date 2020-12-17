@@ -6,12 +6,9 @@ import {
     Switch,
     Route
   } from "react-router-dom";
-<<<<<<< HEAD
 import Home from './Components/Home'
 import FishGame from './Components/FishGame'
 import Map from './Components/Map'
-=======
->>>>>>> dfbba6119fcfa0c1c9f2c1e0dcbec06aa364fbca
 import reportWebVitals from './reportWebVitals';
 //import Home from './Components/Home'
 import Login from './Components/Login'
@@ -21,7 +18,6 @@ import {Provider} from './UsernameContext'
 
 ReactDOM.render(
   <React.StrictMode>
-<<<<<<< HEAD
     <Provider>
       <Router>
           <div>
@@ -39,19 +35,6 @@ ReactDOM.render(
           </div>
       </Router>
     </Provider>
-=======
-    <Router>
-        <div>
-        <Switch>
-          <Provider>
-            {/* <Route exact path="/" component={Home} /> */}
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/chat" component={Chat} />
-          </Provider>
-        </Switch>
-        </div>
-    </Router>
->>>>>>> dfbba6119fcfa0c1c9f2c1e0dcbec06aa364fbca
   </React.StrictMode>,
   document.getElementById('root')
 );
