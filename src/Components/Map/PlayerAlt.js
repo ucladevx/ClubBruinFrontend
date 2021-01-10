@@ -31,18 +31,33 @@ export default function PlayerAlt(props) {
   
   const location = useContext(PositionContext);
 
-  useEffect(async () => {
+  useEffect(() => {
     // console.log(Colyseus);
     let c = new Colyseus.Client("ws://localhost:9000");
     setClient(c);
     var room;
     
+    let api
     c.joinOrCreate("map", {
       username: props.username
     }).then(room_instance => {
         // console.log(room_instance.state.players);
 
         room = room_instance;
+
+        console.log("HERE IS THE ROOM")
+        console.log(room.id)
+
+        const domain = "meet.jit.si";
+        const options = {
+          roomName: room.id,
+          width: 700,
+          height: 500,
+          parentNode: undefined,
+          configOverwrite: {},
+          interfaceConfigOverwrite: {}
+        }
+        api = new window.JitsiMeetExternalAPI(domain, options);
 
         room.state.players.onAdd = function (player, sessionId) {
           // console.log('player', player)
@@ -100,6 +115,11 @@ export default function PlayerAlt(props) {
         })
 
     })
+    return () => {
+      //destruction
+      api && api.dispose()
+      console.log("HELLO HI")
+    }
   }, [])
 
   useFrame(() => {
