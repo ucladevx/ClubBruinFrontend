@@ -7,8 +7,10 @@ import Fish from './Fish'
 import Rod from './Rod'
 import RodAlt from './RodAlt'
 import Loading from '../../Sprites/loading2.gif'
+import Lobby from './Lobby'
 import './index.css'
 
+<<<<<<< HEAD
 function FishGame() {
     return (
       <div className="map">
@@ -23,6 +25,23 @@ function FishGame() {
         </Suspense> */}
     </Canvas>
       </div>
+=======
+function FishGame(gameChosen) {
+
+  return (
+    // <div style={{backgroundColor:'green'}}>
+      <Lobby />
+    // </div>
+    // <div className="map">
+    // <Canvas camera={{ position: [0, 0, 20] }}>
+    //   <directionalLight position={[10, 10, 5]} intensity={0.5} />
+    //   <directionalLight position={[-10, -10, -5]} intensity={0.5} />
+    //   <Suspense fallback={<Html><img style={{marginLeft:'-60%', marginTop:'-50%'}} src={Loading} alt="loading..." width="500px"></img></Html>}>
+    //     <Rod />
+    //   </Suspense>
+    // </Canvas>
+    // </div>
+>>>>>>> 5dd2dccbb7be6bb7217ac49428075ecc77b77180
     )
   }
 
