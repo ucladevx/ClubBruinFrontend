@@ -6,9 +6,9 @@ import * as THREE from 'three';
 import {Html} from 'drei'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import GameOverGraphic from '../../Sprites/gameover.png'
+import * as Colyseus from "colyseus.js";
  
- 
-function Fish({ pointCount, x, y }) {
+function Fish({ pointCount, x, y, room }) {
 
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
@@ -116,6 +116,7 @@ function rotationFactor(type) {
 var fishObj = {};
 
 for (let i = 0; i < pointCount; i++) {
+  // x: i * 400,
   fishObj[i] = {
     x: Math.random() * 400, 
     y: generateStartingPosition(), 
@@ -126,9 +127,11 @@ for (let i = 0; i < pointCount; i++) {
     scaleFactor: scaleFactor(getFishType(i)),
     rotationFactor: rotationFactor(getFishType(i))
   }
-    
+  
 }
 
+// state stuff 
+// room props for fish
 const [fish, setPosition] = useState(fishObj);
 
 
@@ -148,14 +151,18 @@ useFrame(({mouse}) => {
       rotationFactor[2] -= .15
     }
     fishObj_[i] = {x: fish[i].x -  speed, y: fish[i].y, speed: speed, type: type, geometry: geometry, material: material, scaleFactor: scaleFactor, rotationFactor: rotationFactor};
+    // add listeners
     if ((Math.abs(fishObj_[i].x - (x)) < 2.25) && (Math.abs(fishObj_[i].y - (y)) < 2.25)) {
         fishObj_[i].y = -1000;
         setScore(score+1);
+        //room.send("removeFish");
     }
     if (fishObj_[i].x < -30 || fishObj_[i].y === -1000) {
       fishOffScreen++;
+      //room.send("fishDisappeared");
     }
     if (fishOffScreen === pointCount) {
+      //room.send("gameOver");
       setGameOver([0,0,0])
       setReturnHome([-6,-5,0])
     }
