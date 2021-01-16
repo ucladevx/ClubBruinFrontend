@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Suspense } from 'react';
 import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
 import Player from './Player';
@@ -31,7 +31,9 @@ const Scene = ({username}) => {
                     <PositionContext.Provider value={location}>
                     <Light />
                     {/* {players} */}
+                    <Suspense fallback={null}>
                     <PlayerAlt current_player={true} username={username}/>
+                    </Suspense>
                     {/* <GroundPlane /> */}
                     {/* <Background /> */}
                     {/* <Location /> */}
