@@ -24,7 +24,7 @@ function Login(props) {
         setLoggedIn(loggedInBool)
     }
 
-    if (loggedIn) {
+    if (loggedIn || sessionStorage.getItem("loginToken") == "true") {
         history.push('/map')
         // window.location = "/chat"
         return null

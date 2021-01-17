@@ -57,8 +57,10 @@ function ChatApp(props){
   // }, [socket])
 
   const addMessage = message => {
-    socket.emit('chat message', {text: message.text, name: user})
-    setMessages([...messages, {...message, name: user}]);
+    //socket.emit('chat message', {text: message.text, name: user})
+    //setMessages([...messages, {...message, name: user}]);
+    socket.emit('chat message', {text: message.text, name: sessionStorage.getItem("username")})
+    setMessages([...messages, {...message, name: sessionStorage.getItem("username")}]);
   }
 
 
