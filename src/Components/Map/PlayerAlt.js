@@ -49,8 +49,11 @@ export default function PlayerAlt(props) {
   const back_3 = useLoader(THREE.TextureLoader, back3);
   const back_4 = useLoader(THREE.TextureLoader, back4);
 
+  const ready = useRef(true);
+
 
   const [client, setClient] = useState();
+  const [isReadyToMove, updateReady] = useState(true);
   // keeps tracks of each individual player's position
   const playerPosition_x = useRef(0)
   const [score, setScore] = useState(0);
@@ -72,6 +75,10 @@ export default function PlayerAlt(props) {
 
   function updateScore(score) {
     return (score+1);
+  }
+
+  function loadReady() {
+    ready.current = true;
   }
 
   function getImage(curr_img, direction) {
@@ -198,6 +205,10 @@ export default function PlayerAlt(props) {
         }
 
         window.addEventListener("keydown", function(e) {
+          if (ready.current == true) {
+          if (isReadyToMove) {
+            ready.current = false;
+            setTimeout(loadReady, 100);
           isMoving.current[e.keyCode] = true;
           if (isMoving.current[38]) {
             room.send("move", { y: 1 });
@@ -219,12 +230,15 @@ export default function PlayerAlt(props) {
             room.send("move", { x: -1 });
             setImage(playerImage => getImage(playerImage, 'left'));
           }
+        }
+
+        }
         })
 
         window.addEventListener("keyup", function(e) {
           delete isMoving.current[e.keyCode];
         })
-
+        
     })
   }, [])
 
