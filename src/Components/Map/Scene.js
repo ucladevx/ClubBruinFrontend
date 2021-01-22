@@ -8,6 +8,8 @@ import Light from './Light';
 import GroundPlane from './Ground';
 import Background from './Background';
 import './Scene.css';
+import NavComponent from '../NavComponent';
+import { Html } from 'drei';
 
 export const PositionContext = React.createContext();
 
@@ -37,6 +39,7 @@ const Scene = ({username}) => {
                     {/* <Location /> */}
                     </PositionContext.Provider>
                 </Canvas>
+                {/* <NavComponent /> */}
             {/* </div> */}
         </scene>
     )

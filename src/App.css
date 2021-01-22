@@ -90,3 +90,18 @@
   color: black;
 }
 */
+
+
+.navPositionParent {
+  position: relative;
+}
+
+.navPositionChild {
+  position:absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.chatDisplay {
+  display: none;
+}
