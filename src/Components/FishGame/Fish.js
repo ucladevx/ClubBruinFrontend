@@ -8,7 +8,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import GameOverGraphic from '../../Sprites/gameover.png'
 import * as Colyseus from "colyseus.js";
  
-function Fish({ pointCount, x, y, room }) {
+function Fish({ pointCount, x, y,room}) {
 
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
