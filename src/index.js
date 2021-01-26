@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 //import Home from './Components/Home'
 import Login from './Components/Login'
 import Chat from './Components/ChatApp'
+import InvertedFountain from './Components/Map/InvertedFountain';
 //import {UsernameContext} from './UsernameContext'
 import {Provider} from './UsernameContext'
 
@@ -28,6 +29,7 @@ ReactDOM.render(
                   
                   <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
                   <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
+                  <Route exact path="/map/fountain" render = {() => <Provider><InvertedFountain></InvertedFountain></Provider>} />
                   <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
                   <Route exact path="/fishgame" render = {() => <Provider><FishGame></FishGame></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}

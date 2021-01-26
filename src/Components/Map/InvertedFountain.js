@@ -7,7 +7,7 @@ import {useHistory} from 'react-router-dom'
 import NavComponent from '../NavComponent';
 
 
-export default function Map() {
+export default function InvertedFountain() {
   const {user} = useContext(UsernameContext)
   const history = useHistory()
   return (
@@ -66,10 +66,9 @@ export default function Map() {
                   width: 250,
                   height: 100
                 }} onClick={() => {
-                  // history.push('/map/fountain')
-                  document.location.href = ('google.com','map/fountain');
+                  history.push('/fishgame')
                 }}>
-                  Visit the Inverted Fountain!
+                  Play the fish game
                 </button>
             </div>
   );
