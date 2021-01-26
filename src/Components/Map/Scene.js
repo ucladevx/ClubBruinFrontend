@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
 import Player from './Player';
@@ -26,10 +26,21 @@ const Scene = ({username}) => {
         setPlayers(players.concat(<Player color={'skyblue'} x_position={0.2} y_position={0}/>))
     }
 
+    const [setting, updateSetting] = useState();
+
+    useEffect(() => {
+        if (window.location.pathname === "/map/fountain") {
+            updateSetting("fountain")
+        }
+        else {
+            updateSetting("default")
+        }
+    }, [])
+
     return (
         <scene ref={scene}>
             {/* <div className="map" onClick={addPlayers}> */}
-                <Canvas id="canvas">
+                <Canvas id={setting}>
                     <PositionContext.Provider value={location}>
                     <Light />
                     {/* {players} */}
