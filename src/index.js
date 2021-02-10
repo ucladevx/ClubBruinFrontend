@@ -7,6 +7,7 @@ import {
     Route
   } from "react-router-dom";
 import Home from './Components/Home'
+import GenericGame from './Components/GenericGame'
 import FishGame from './Components/FishGame'
 import Map from './Components/Map'
 import reportWebVitals from './reportWebVitals';
@@ -29,7 +30,8 @@ ReactDOM.render(
                   <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
                   <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
                   <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
-                  <Route exact path="/fishgame" render = {() => <Provider><FishGame></FishGame></Provider>} />
+                  <Route exact path="/fishgame" render = {() => <Provider><GenericGame gameType="map" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} />
+                  <Route exact path="/mapTest" render = {() => <Provider><GenericGame gameType="map" chat={false} webcam={false}><Map></Map></GenericGame></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}
               </Switch>
           </div>

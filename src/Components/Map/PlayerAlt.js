@@ -31,21 +31,21 @@ export default function PlayerAlt(props) {
   
   const location = useContext(PositionContext);
 
-  useEffect(async () => {
-    // console.log(Colyseus);
-    let c = new Colyseus.Client("ws://localhost:9000");
-    setClient(c);
-    var room;
-    
-    c.joinOrCreate("map", {
-      username: props.username
-    }).then(room_instance => {
-        // console.log(room_instance.state.players);
-
-        room = room_instance;
-
-        room.state.players.onAdd = function (player, sessionId) {
-          // console.log('player', player)
+  useEffect( () => {
+    if (props.room){
+      var room = props.room;
+  
+      room.state.players.onAdd = function (player, sessionId) {
+        // console.log('player', player)
+        setPlayers((p)=>({
+          ...p,
+          [player.username] : {
+            x: player.x,
+            y: player.y,
+          }
+        }));
+        player.onChange = function (changes) {
+          // console.log('plyer update', player.username)
           setPlayers((p)=>({
             ...p,
             [player.username] : {
@@ -53,54 +53,44 @@ export default function PlayerAlt(props) {
               y: player.y,
             }
           }));
-          player.onChange = function (changes) {
-            // console.log('plyer update', player.username)
-            setPlayers((p)=>({
-              ...p,
-              [player.username] : {
-                x: player.x,
-                y: player.y,
+        }
+      }
+
+      room.state.players.onRemove = function (player, sessionId) {
+        setPlayers(p => {
+          console.log(p);
+          let obj = {}
+          Object.keys(p).forEach((key) => {
+              console.log(p);
+              if (player.username !== key){
+                obj[key] = p[key]
               }
-            }));
-          }
-        }
-
-        room.state.players.onRemove = function (player, sessionId) {
-          setPlayers(p => {
-            console.log(p);
-            let obj = {}
-            Object.keys(p).forEach((key) => {
-                console.log(p);
-                if (player.username !== key){
-                  obj[key] = p[key]
-                }
-              })
-            return obj  
-          })
-        }
-
-        window.addEventListener("keydown", function(e) {
-          isMoving.current[e.keyCode] = true;
-          if (isMoving.current[38]) {
-            room.send("move", { y: 1 });
-          }
-          else if (isMoving.current[39]) {
-            room.send("move", { x: 1 });
-          }
-          else if (isMoving.current[40]) {
-            room.send("move", { y: -1 });
-          }
-          else if (isMoving.current[37]) {
-            room.send("move", { x: -1 });
-          }
+            })
+          return obj  
         })
+      }
 
-        window.addEventListener("keyup", function(e) {
-          delete isMoving.current[e.keyCode];
-        })
+      window.addEventListener("keydown", function(e) {
+        isMoving.current[e.keyCode] = true;
+        if (isMoving.current[38]) {
+          room.send("move", { y: 1 });
+        }
+        else if (isMoving.current[39]) {
+          room.send("move", { x: 1 });
+        }
+        else if (isMoving.current[40]) {
+          room.send("move", { y: -1 });
+        }
+        else if (isMoving.current[37]) {
+          room.send("move", { x: -1 });
+        }
+      })
 
-    })
-  }, [])
+      window.addEventListener("keyup", function(e) {
+        delete isMoving.current[e.keyCode];
+      })
+    }
+  }, [props.room])
 
   useFrame(() => {
     // console.log(players)

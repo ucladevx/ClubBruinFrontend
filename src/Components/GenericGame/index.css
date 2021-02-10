@@ -1,0 +1,24 @@
+/* General Styling */
+.overlay {
+    position: fixed;
+    z-index: 10;
+    background-color: gray;
+}
+
+/* Webcam Styling */
+#webcam-container {
+    left: 2vh;
+    top: 2vh;
+    width: 32vw;
+    height: 48vh;
+    transform: scale(0.70);
+    transform-origin: 0% 0% 0px;
+  }
+
+  /* ChatBox Styling */
+  #chat-container {
+      right: 0;
+      bottom: 0;
+      height: 100px; 
+      width: 100px;
+  }
