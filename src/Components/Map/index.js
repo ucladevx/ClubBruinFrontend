@@ -65,7 +65,7 @@ export default function Map (props) {
           width: 250,
           height: 100
         }} onClick={() => {
-          history.push('/fishgame')
+          history.push('/fishgame/lobby')
         }}>
           Play the fish game
         </button>

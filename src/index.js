@@ -9,6 +9,7 @@ import {
 import Home from './Components/Home'
 import GenericGame from './Components/GenericGame'
 import FishGame from './Components/FishGame'
+import Lobby from './Components/Lobby/Lobby'
 import Map from './Components/Map'
 import reportWebVitals from './reportWebVitals';
 //import Home from './Components/Home'
@@ -24,13 +25,12 @@ ReactDOM.render(
           <div>
               <Switch>
                   {/* <Route exact path="/" component={Home} /> */}
-                  {/* <Route exact path="/login" component={Login} /> */}
-                  
-                  
+                  {/* <Route exact path="/login" component={Login} /> */}     
                   <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
                   <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
                   <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
-                  <Route exact path="/fishgame" render = {() => <Provider><GenericGame gameType="map" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} />
+                  <Route exact path="/fishgame/:id" render = {() => <Provider><GenericGame gameType="map" location="lobby" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} />
+                  {/* <Route exact path="/fishgame" component={Lobby} /> */}
                   <Route exact path="/mapTest" render = {() => <Provider><GenericGame gameType="map" chat={false} webcam={false}><Map></Map></GenericGame></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}
               </Switch>
