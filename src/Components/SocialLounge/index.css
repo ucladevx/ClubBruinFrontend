@@ -11,8 +11,7 @@
 }
 
 ::placeholder {
-    color: black;
-
+    color: gray;
 }
 
 .input-field {
