@@ -13,6 +13,7 @@ import reportWebVitals from './reportWebVitals';
 //import Home from './Components/Home'
 import Login from './Components/Login'
 import Chat from './Components/ChatApp'
+import SocialLounge from './Components/SocialLounge'
 //import {UsernameContext} from './UsernameContext'
 import {Provider} from './UsernameContext'
 
@@ -30,6 +31,7 @@ ReactDOM.render(
                   <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
                   <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
                   <Route exact path="/fishgame" render = {() => <Provider><FishGame></FishGame></Provider>} />
+                  <Route exact path="/sociallounge" render = {() => <Provider><SocialLounge></SocialLounge></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}
               </Switch>
           </div>
