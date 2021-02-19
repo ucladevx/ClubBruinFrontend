@@ -1,0 +1,187 @@
+/*
+.containerlogin {
+    background-color: black;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+*/
+
+.container-signin {
+    background-color: rgb(94, 130, 228);
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-signup {
+    background-color: white;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-components {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+}
+
+.logo-image {
+    width: 500px;
+    margin: -80px;
+    margin-left: -55px;
+    display: flex;
+}
+
+/*
+.header {
+    color: white;
+    font-size: 30px;
+    padding: 4px;
+}
+*/
+
+.header-signin {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+ 
+.header-signup {
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.userSuccess {
+    display: flex;
+    justify-content: center;
+    color: green;
+    margin: 10px 0px;
+}
+
+.userError {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.form-signin {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+}
+
+.form-signup {
+    display: flex;
+    justify-content: center;
+    color: rgb(94, 130, 228);
+    font-size: 20px;
+}
+
+/*
+.logininput {
+    display: flex;
+    flex-direction: column;
+    height: 35px;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px 5px;
+    width: 300px;
+  }
+*/
+
+.input-signin {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 5px 20px;
+    width: 300px;
+    font-size: 16px;
+}
+ 
+.input-signup {
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+    background-color: lightgray;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 5px 20px;
+    width: 300px;
+    font-size: 16px;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+
+.login-button {
+    background-color: rgb(192, 213, 225);
+    color: black;
+    font-size: 15px;
+    padding: 5px 5px;
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100px;
+}
+
+.change-to-signup {
+    display: flex;
+    color: white;
+    margin: 15px;
+}
+
+.change-to-signup-button {
+    background-color: transparent;
+    color: rgb(255, 205, 50);
+    border: hidden;
+    cursor: pointer;
+    margin-left: 2px;
+}
+ 
+.change-to-signin {
+    display: flex;
+    color: black;
+    margin: 15px;
+}
+
+.change-to-signin-button {
+    background-color: transparent;
+    color: rgb(94, 130, 228);
+    border: hidden;
+    cursor: pointer;
+    margin-left: 2px;
+}
+

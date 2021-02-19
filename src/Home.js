@@ -1,3 +1,4 @@
+/*
 import './App.css';
 import emailjs from 'emailjs-com'
 
@@ -5,7 +6,7 @@ function Home() {
   return (
     <div>
     <div className="parent">
-      {/* <button onClick = {() => speak()}>Send the mail</button> */}
+      {/* <button onClick = {() => speak()}>Send the mail</button> *//*}
       <h1 className="header">Interested in beta testing?</h1>
       <form onSubmit={sendEmail}>
         <div>
@@ -56,3 +57,4 @@ function sendEmail(e) {
 
 
 export default Home;
+*/

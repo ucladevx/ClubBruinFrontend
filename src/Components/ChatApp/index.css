@@ -1,0 +1,80 @@
+.containerchat {
+	display: flex;
+	flex-direction: column;
+	height: 400px;
+	width: 400px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 40px;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	color: black;
+	background-color: rgb(143, 165, 228);
+}
+
+.message {
+	margin: 15px 0;
+}
+
+.message-username {
+	padding: 4px;
+	color: blue;
+}
+
+.message-text {
+	display: inline;
+	padding: 4px 8px;
+	border-radius: 8px;
+	color: black;
+	background-color:  rgb(255, 226, 140);
+}
+
+.message-time {
+	font-size: 11px;
+	padding: 2px;
+	color: rgb(61, 61, 61);
+}
+
+.message-list {
+	flex-grow: 1;
+	box-sizing: border-box;
+	padding: 0 0 0 6px;
+	margin: 0;
+	width: 100%;
+	overflow-y: auto;
+	background-color: white;
+}
+
+.send-message-form {
+	/*position: fixed;
+  bottom: 0px;*/
+	width: 100%;
+	display: flex;
+	box-sizing: border-box;
+	height: 60px;
+	background-color: rgb(216, 216, 216);
+}
+
+.send-message-form input {
+	width: 100%;
+	padding: 15px 10px;
+	border: none;
+	margin: 0;
+	background: rgb(216, 216, 216);
+	color: black;
+	font-weight: 200;
+}
+
+.send-message-form input:focus {
+	outline-width: 0;
+}
+
+.send-message-form input::placeholder {
+	color: black;
+}
