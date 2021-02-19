@@ -18,6 +18,8 @@ function SignupForm(props) {
         setEmail(e.target.value)
     }
 
+
+
     const handleSubmit = e => {
         e.preventDefault()
         // props.helper(username, password, email)

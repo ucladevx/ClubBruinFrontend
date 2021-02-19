@@ -42,7 +42,9 @@ function Login(props) {
                         <Signin helper={loginbool} />
                         <div className="change-to-signup">Don't have an account?<button className="change-to-signup-button" onClick={clickSignup}>Sign up!</button></div>
                     </div>
-                </div> :
+                </div> 
+                
+                :
 
                 <div className="container-signup">
                     <div className="login-components">
