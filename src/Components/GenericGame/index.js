@@ -20,7 +20,7 @@ export default function GenericGame (props) {
 
     function joinARoom(chosenRoom) {
         joinRoom(true);
-        history.push('/fishgame/' + chosenRoom.id)
+        history.push(chosenRoom.game + chosenRoom.id)
     }
 
     // we want the lobby to reload if the user goes back
@@ -29,8 +29,7 @@ export default function GenericGame (props) {
       });      
 
     useEffect(() => {
-        // checks the pathname on changes, checks to display lobby or fish game
-        let current_room = location.pathname.substr(-5);
+        let current_room = (location.pathname.substr(location.pathname.lastIndexOf('/') + 1));
         if (current_room == 'lobby') {
             joinRoom(false);
         }
@@ -50,6 +49,8 @@ export default function GenericGame (props) {
                 username: user
             }).then(room_instance => {
                 setRoom(room_instance)
+                console.log("ROOM");
+                console.log(room_instance);
             })
         }
         configureColyseus();
@@ -58,7 +59,7 @@ export default function GenericGame (props) {
 
     return (
         <div>
-            { !isJoinedRoom ? <Lobby joinRoom={joinARoom}/> : null }
+            { props.chat && !isJoinedRoom ? <Lobby joinRoom={joinARoom}/> : null }
             { props.chat && isJoinedRoom ? <Chat/> : null }
             { props.webcam && isJoinedRoom ? <Webcam/> : null }
             { isJoinedRoom ? cloneElement(props.children, {room, username: user}) : null }

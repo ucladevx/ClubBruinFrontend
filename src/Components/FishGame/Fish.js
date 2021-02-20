@@ -21,14 +21,6 @@ import Seahorse from '../../Sprites/Fish/seahorse.png'
  
 function Fish({ pointCount, x, y, history }) {
 
-  const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
-  const texture = useLoader(THREE.TextureLoader, Nemo)
-  const video = document.getElementById('Nemo');
-  const loader = new GifLoader();
-  const shark = useLoader(GLTFLoader, '/models/shark.glb')
-  const hybopsis = useLoader(GLTFLoader, '/models/another.glb')
-  const redfish = useLoader(GLTFLoader, '/models/redfish.glb')
-
   const sprtex = useLoader(THREE.TextureLoader, Yellow);
   const greyFish = useLoader(THREE.TextureLoader, Grey);
   const swordFish = useLoader(THREE.TextureLoader, Swordfish);
@@ -57,36 +49,25 @@ function generateStartingPosition() {
   return startingPoint * (-15)
 }
 
-function getFishType(index) {
-  if (index % 2 == 0 && index % 7 !== 0 && index % 4 != 0) {
-    return scene
+
+function getSpeed(index) {
+  if (index >= 0 && index < 10) {
+    return .35
+  }
+  else if (index >= 10 && index < 20) {
+    return .45
   }
 
-  if (index % 4 === 0) {
-    return redfish;
+  else if (index >= 20 && index < 30) {
+    return .25
   }
 
-  else if (index % 7 == 0) {
-    return shark
-  }
-
-  else {return hybopsis}
-}
-
-function getSpeed(type, index) {
-  if (type === shark) {
-    return .35;
-  }
   else {
-    let speed = (Math.abs(Math.cos(index) / 3));
-    if (speed > .25) {
-      return speed;
-    }
-    else {
-      return .25
-    }
+    return .4
   }
+
 }
+
 
 var fishObj = {};
 
@@ -94,56 +75,59 @@ for (let i = 0; i < pointCount; i++) {
   fishObj[i] = {
     x: Math.random() * 400, 
     y: generateStartingPosition(), 
-    speed: getSpeed(getFishType(i), i), 
+    speed: getSpeed(i), 
   }
     
 }
 
 const [fish, setPosition] = useState(fishObj);
 
+
 function getFish(key) {
-  if (key % 10 == 0) {
-    return hammerhead;
-  }
-  if (key % 12 == 0) {
-    return seahorse;
-  }
-  if (key % 7 == 0) {
-    return swordFish
-  }
-  else if (key % 6 == 0) {
-    return angler
-  }
-
-  else if (key % 5 == 0) {
-    return greyFish
-  }
-
-  else if (key % 4 == 0 || key % 3 == 0) {
-    return blue
-  }
-
-  else {
+  if (key >= 0 && key < 7) {
     return sprtex
   }
-
+  else if (key >= 7 && key < 11) {
+    return angler
+  }
+  else if (key >= 11 && key < 20) {
+    return blue
+  }
+  else if (key >= 20 && key < 25) {
+    return greyFish
+  }
+  else if (key >= 25 && key < 32) {
+    return seahorse
+  }
+  else if (key >= 32 && key < 37) {
+    return swordFish
+  }
+  else {
+    return hammerhead 
+  }
 }
 
 function getSize(key) {
-  if (key % 10 == 0) {
-    return [13, 7, 0.1]
+  if (key >= 0 && key < 7) {
+    return [5, 3, 0.1]
   }
-  else if (key % 12 == 0) {
-    return [3, 5, 0.1]
-  }
-  else if (key % 7 == 0) {
-    return [10, 3, 0.1]
-  }
-  else if (key % 6 == 0) {
+  else if (key >= 7 && key < 11) {
     return [8, 5, 0.1]
   }
-  else {
+  else if (key >= 11 && key < 20) {
     return [5, 3, 0.1]
+  }
+  else if (key >= 20 && key < 25) {
+    return [5, 3, 0.1]
+  }
+  else if (key >= 25 && key < 32) {
+    return [3, 5, 0.1]
+  }
+  else if (key >= 32 && key < 37) {
+    return [10, 3, 0.1]
+  }
+  else {
+    return [13, 7, 0.1] 
   }
 }
 
@@ -167,9 +151,6 @@ useFrame(({mouse}) => {
     let material = fishObj[i].material
     let scaleFactor = fishObj[i].scaleFactor
     let rotationFactor = fishObj[i].rotationFactor;
-    if (type === shark || type === hybopsis) {
-      rotationFactor[2] -= .15
-    }
     fishObj_[i] = {x: fish[i].x -  speed, y: fish[i].y, speed: speed, type: type, geometry: geometry, material: material, scaleFactor: scaleFactor, rotationFactor: rotationFactor};
     if ((Math.abs(fishObj_[i].x - (x)) < 2.25) && (Math.abs(fishObj_[i].y - (y)) < 2.25)) {
         fishObj_[i].y = -1000;

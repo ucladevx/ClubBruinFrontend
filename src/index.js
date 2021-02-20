@@ -28,10 +28,12 @@ ReactDOM.render(
                   {/* <Route exact path="/login" component={Login} /> */}     
                   <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
                   <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
-                  <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
-                  <Route exact path="/fishgame/:id" render = {() => <Provider><GenericGame gameType="map" location="lobby" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} />
+                  {/* <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} /> */}
+                  {/* <Route exact path="/fishgame/:id" render = {() => <Provider><GenericGame gameType="map" location="lobby" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} /> */}
                   {/* <Route exact path="/fishgame" component={Lobby} /> */}
-                  <Route exact path="/mapTest" render = {() => <Provider><GenericGame gameType="map" chat={false} webcam={false}><Map></Map></GenericGame></Provider>} />
+                  <Route exact path="/mapTest" render = {() => <Provider><GenericGame gameType="map" chat={false} webcam={false} lobby={false}><Map></Map></GenericGame></Provider>} />
+                  <Route exact path="/fishgame/:id" render = {() => <Provider><GenericGame gameType="map" location="lobby" chat={true} webcam={true}><FishGame></FishGame></GenericGame></Provider>} />
+                  <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
                   {/* <Route exact path="/chat" component={Chat} /> */}
               </Switch>
           </div>

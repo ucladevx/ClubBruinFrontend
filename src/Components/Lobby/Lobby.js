@@ -12,24 +12,24 @@ export default function Lobby(props) {
  
    const [fakeData, updateData] = useState(
        [
-           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:35906},
-           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:12906},
-           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:66906},
-           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:54906},
-           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:44576},
-           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:45091},
-           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:12306},
-           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:75906},
-           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:72906},
-           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:48306},
-           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:41126},
-           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:78806},
-           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:47606},
-           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:54306},
-           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:11906},
-           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:10906},
-           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:25906},
-           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:90906},
+           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:35906, game:'/fishgame/'},
+           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:12906, game:'/fishgame/'},
+           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:66906, game:'/fishgame/'},
+           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:54906, game:'/fishgame/'},
+           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:44576, game:'/fishgame/'},
+           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:45091, game:'/fishgame/'},
+           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:12306, game:'/fishgame/'},
+           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:75906, game:'/fishgame/'},
+           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:72906, game:'/fishgame/'},
+           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:48306, game:'/fishgame/'},
+           {name:"The Room of Death", players: 6, status:"In Progress", hovered:false, id:41126, game:'/fishgame/'},
+           {name: "My Room", players: 1, status: "Not Started", hovered:false, id:78806, game:'/fishgame/'},
+           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:47606, game:'/fishgame/'},
+           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:54306, game:'/fishgame/'},
+           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:11906, game:'/fishgame/'},
+           {name: "Rivalry Room", players: 3, status: "In Progress",hovered:false, id:10906, game:'/fishgame/'},
+           {name: "DO NOT JOIN THIS ROOM", players: 1, status: "Not Started",hovered:false, id:25906, game:'/fishgame/'},
+           {name: "SO BORED plz join", players: 3, status: "In Progress",hovered:false, id:90906, game:'/fishgame/'},
  
  
        ]
@@ -67,6 +67,7 @@ export default function Lobby(props) {
     }, [])
  
    return (
+       <div>
        <div style={{overflow:'hidden'}} className="lobbyContainer">
            <div className="lobbyBoard" style={{overflow:'scroll'}}>
                <p id="rooms" className="font">Rooms
@@ -98,6 +99,7 @@ export default function Lobby(props) {
                    ))}
                </table>
            </div>
+       </div>
        </div>
    )
 }

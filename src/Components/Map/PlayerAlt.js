@@ -34,9 +34,11 @@ export default function PlayerAlt(props) {
   useEffect( () => {
     if (props.room){
       var room = props.room;
-  
+      console.log("PLAYER ALT");
+      console.log(room)
+      console.log(room.state.players)
       room.state.players.onAdd = function (player, sessionId) {
-        // console.log('player', player)
+        console.log('player', player)
         setPlayers((p)=>({
           ...p,
           [player.username] : {
