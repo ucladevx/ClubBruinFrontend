@@ -12,7 +12,7 @@ import Map from './Components/Map'
 import reportWebVitals from './reportWebVitals';
 //import Home from './Components/Home'
 import Login from './Components/Login'
-import Chat from './Components/ChatApp'
+import Chat from './Components/ChatApp/Index'
 //import {UsernameContext} from './UsernameContext'
 import {Provider} from './UsernameContext'
 
