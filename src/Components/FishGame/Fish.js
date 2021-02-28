@@ -8,7 +8,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import GameOverGraphic from '../../Sprites/gameover.png'
 import * as Colyseus from "colyseus.js";
  
-function Fish({ pointCount, x, y,room}) {
+// change x and y input to all x and y? 
+function Fish({ fishCount, x, y,room}) {
 
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
@@ -115,18 +116,20 @@ function rotationFactor(type) {
 
 var fishObj = {};
 
-for (let i = 0; i < pointCount; i++) {
+for (let i = 0; i < fishCount; i++) {
   // x: i * 400,
-  fishObj[i] = {
-    x: Math.random() * 400, 
-    y: generateStartingPosition(), 
-    speed: getSpeed(getFishType(i), i), 
-    type: getFishType(i),
-    geometry: getGeometry(getFishType(i)),
-    material: getMaterial(getFishType(i)),
-    scaleFactor: scaleFactor(getFishType(i)),
-    rotationFactor: rotationFactor(getFishType(i))
-  }
+  room.send("createFish", 
+    {
+      x: Math.random() * 400, 
+      y: generateStartingPosition(), 
+      speed: getSpeed(getFishType(i), i), 
+      type: getFishType(i),
+      geometry: getGeometry(getFishType(i)),
+      material: getMaterial(getFishType(i)),
+      scaleFactor: scaleFactor(getFishType(i)),
+      rotationFactor: rotationFactor(getFishType(i))
+    }
+  );
   
 }
 
@@ -134,6 +137,13 @@ for (let i = 0; i < pointCount; i++) {
 // room props for fish
 const [fish, setPosition] = useState(fishObj);
 
+useEffect(() => {
+  // Using an IIFE
+  (async function anyNameFunction() {
+
+  })();
+
+},[]);
 
 useFrame(({mouse}) => {
 
@@ -152,6 +162,7 @@ useFrame(({mouse}) => {
     }
     fishObj_[i] = {x: fish[i].x -  speed, y: fish[i].y, speed: speed, type: type, geometry: geometry, material: material, scaleFactor: scaleFactor, rotationFactor: rotationFactor};
     // add listeners
+    // check for collision over all listeners
     if ((Math.abs(fishObj_[i].x - (x)) < 2.25) && (Math.abs(fishObj_[i].y - (y)) < 2.25)) {
         fishObj_[i].y = -1000;
         setScore(score+1);

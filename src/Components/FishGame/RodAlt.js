@@ -31,104 +31,6 @@ function RodAlt() {
   //const [seshId,setId] = useState();
   const [rodPositions, setRodPositions] = useState({});
   
-/*
-  useEffect(async () => {
-    // console.log(Colyseus);
-    let c = new Colyseus.Client("ws://localhost:9000");
-    setClient(c);
-    c.joinOrCreate("fishgame", {
-    }).then(room => {
-        console.log("setting room");
-        setRoomInstance(room);
-
-        if (room) {
-          console.log(" testing room");
-          room.state.players.onAdd = function (player, sessionId) {
-            
-            console.log("adding player");
-            setPlayer((p)=>({
-              ...p,
-              [sessionId] : {
-                score : player.score,
-                x: player.rod.x,
-                y: player.rod.y,
-              }
-            }));
-            console.log(playerz.x)
-            console.log(playerz.y)
-            player.onChange = function (changes) {
-              changes.forEach(change => {
-                console.log("change in player");
-                console.log(playerz.x)
-                console.log(playerz.y)
-    
-                setPlayer((p)=>({
-                  ...p,
-                  [sessionId] : {
-                    score : player.score,
-                    x: player.rod.x,
-                    y: player.rod.y,
-                  }
-                }));
-            });
-              
-            }
-            player.triggerAll();
-          }
-          
-          room.state.players.onRemove = function (player, sessionId) {
-            setPlayer(null);
-          }
-        }
-    }) 
-  },[]); 
-*/
-
- 
-  /*
-  useEffect(async () => {
-    if (room) {
-      //console.log(" testing room");
-      room.state.players.onAdd = function (player, sessionId) {
-        console.log("adding player");
-        console.log(player.rod.x);
-        console.log(player.rod.y)
-        console.log(player.score)
-        setPlayer((p)=>({
-          ...p,
-          [sessionId] : {
-            score : player.score,
-            x: player.rod.x,
-            y: player.rod.y,
-          }
-        }));
-
-        player.onChange = function (changes) {
-          changes.forEach(change => {
-            console.log("change in player");
-            console.log(player.rod.x)
-            console.log(player.rod.y)
-
-            setPlayer((p)=>({
-              ...p,
-              [sessionId] : {
-                score : player.score,
-                x: player.rod.x,
-                y: player.rod.y,
-              }
-            }));
-        });
-        }
-
-        player.triggerAll();
-      }
-      
-      room.state.players.onRemove = function (player, sessionId) {
-        setPlayer(null);
-      }
-    }
-  },[room])
-*/
 
   useEffect(() => {
     // Using an IIFE
@@ -199,7 +101,7 @@ function RodAlt() {
   //console.log(player);
   return (
     <>
-    <Fish x={xPos} y={yPos} pointCount={40}/>
+    <Fish x={xPos} y={yPos} fishCount={40}/>
     
     <mesh
       position={[xPos,yPos,1]}
