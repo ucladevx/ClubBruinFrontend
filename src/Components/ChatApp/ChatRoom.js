@@ -5,29 +5,41 @@ import Title from './Title';
 import connect from 'socket.io-client'
 import {UsernameContext} from '../../UsernameContext'
 import useSocket from 'use-socket.io-client';
+import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
 
 function ChatRoom(props) {
-
-    const [socket] = useSocket('http://localhost:3333');
-
-    const [messages, setMessages] = useState([]);
-
     const {user} = useContext(UsernameContext)
+    const [messages, setMessages] = useState([]);
+    const [client, setClient] = useState();
+    const [room, setRoom]  = useState(null)
 
     useEffect(() => {
-        socket.on('received', (p)=>{setMessages(m => [...m, p])})
+        async function configureColyseus () {
+            let c = new Colyseus.Client("ws://localhost:9000");
+            setClient(c);
+
+            await c.joinOrCreate("chat", {
+                username: user,
+                accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhc2FueWEiLCJlbWFpbCI6ImdhcmZpZWxkQGcudWNsYS5lZHUiLCJpYXQiOjE2MTQ1NDIxOTksImV4cCI6MTYxNTQwNjE5OX0.fcSUyAI_clMf86PoycZxeHfRWFaIu_bK3wI5sXhmm0A",
+                chatId: "338868159864"
+            }).then(room_instance => {
+                setRoom(room_instance)
+            })
+        }
+        configureColyseus();
+        console.log('hi')
     }, [])
 
-    const addMessage = message => {
-        socket.emit('chat message', {text: message.text, name: sessionStorage.getItem("username")})
-        setMessages([...messages, {...message, name: sessionStorage.getItem("username")}]);
-    }
+    room.onMessage("chat-hist", (message) => {
+        console.log("message received from server");
+        console.log(message);
+    });
+
 
     return (
         <div className="containerchat">
             <Title title={props.identifier}/>
             <MessageList messages={messages}/>
-            <SendMessageForm onSubmit={addMessage}/>
         </div>
     )
 }

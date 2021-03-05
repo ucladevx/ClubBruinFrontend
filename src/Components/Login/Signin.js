@@ -23,7 +23,7 @@ function Signin(props) {
             props.helper({
             loggedInBool: true
             })
-            sessionStorage.setItem("loginToken", "true")
+            sessionStorage.setItem("loginToken", res.data.token)
             sessionStorage.setItem("username", res.data.username)
             return res.data.message
         })
