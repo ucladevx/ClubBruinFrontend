@@ -16,7 +16,7 @@ function MessageList(props){
         <div className="message-list">
             {props.messages.map((message, index) => {
                 return (
-                    <Message key={index} username={message.name} text={message.text} time={message.time}/>
+                    <Message key={index} username={message.name} text={message.messages} time={message.timestamp.toString()}/>
                 );
             })}
             <ScrollToBottom />

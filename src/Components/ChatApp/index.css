@@ -78,3 +78,7 @@
 .send-message-form input::placeholder {
 	color: black;
 }
+
+.invisible {
+	display: none;
+}

@@ -13,6 +13,7 @@ function ChatRoom(props) {
     const [client, setClient] = useState();
     const [room, setRoom]  = useState(null)
 
+    //establish colyseus connection
     useEffect(() => {
         async function configureColyseus () {
             let c = new Colyseus.Client("ws://localhost:9000");
@@ -21,25 +22,29 @@ function ChatRoom(props) {
             await c.joinOrCreate("chat", {
                 username: user,
                 accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhc2FueWEiLCJlbWFpbCI6ImdhcmZpZWxkQGcudWNsYS5lZHUiLCJpYXQiOjE2MTQ1NDIxOTksImV4cCI6MTYxNTQwNjE5OX0.fcSUyAI_clMf86PoycZxeHfRWFaIu_bK3wI5sXhmm0A",
-                chatId: "338868159864"
+                chatId: props.id
             }).then(room_instance => {
                 setRoom(room_instance)
             })
         }
         configureColyseus();
-        console.log('hi')
-    }, [])
+        return () => {
+            room?.leave();
+        }
+    }, [room])
 
-    room.onMessage("chat-hist", (message) => {
+    //checks for any incoming message from colyseus server API
+    room?.onMessage("chat-hist", (message) => {
         console.log("message received from server");
         console.log(message);
+        setMessages(message)
     });
-
 
     return (
         <div className="containerchat">
             <Title title={props.identifier}/>
             <MessageList messages={messages}/>
+            <SendMessageForm/>
         </div>
     )
 }

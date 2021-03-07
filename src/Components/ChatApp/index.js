@@ -121,7 +121,7 @@ function ChatApp(){
       {currentChatID?
         <div>
           <button onClick={backToRoomsList}>Back</button>
-          <ChatRoom identifier={currentChatID}/>
+          <ChatRoom id="6040c127f3763d405f8cb620" identifier={currentChatID}/>
         </div>
       :
         <div>
