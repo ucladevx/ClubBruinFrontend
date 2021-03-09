@@ -94,14 +94,12 @@ function RodAlt() {
 
 
 
-
-
   // temporarily using the hook without the rod
   const texture = useLoader(THREE.TextureLoader, hookNoLine)
   //console.log(player);
   return (
     <>
-    <Fish x={xPos} y={yPos} fishCount={40}/>
+    <Fish x={xPos} y={yPos} pointCount={40} room={room}/>
     
     <mesh
       position={[xPos,yPos,1]}

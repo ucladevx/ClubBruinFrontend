@@ -9,7 +9,7 @@ import GameOverGraphic from '../../Sprites/gameover.png'
 import * as Colyseus from "colyseus.js";
  
 // change x and y input to all x and y? 
-function Fish({ fishCount, x, y,room}) {
+function Fish({ pointCount, x, y,room}) {
 
   const { scene } = useLoader(GLTFLoader, '/models/largerfish.glb')
   const shark = useLoader(GLTFLoader, '/models/shark.glb')
@@ -116,27 +116,33 @@ function rotationFactor(type) {
 
 var fishObj = {};
 
-for (let i = 0; i < fishCount; i++) {
+for (let i = 0; i < pointCount; i++) {
   // x: i * 400,
-  room.send("createFish", 
-    {
-      x: Math.random() * 400, 
-      y: generateStartingPosition(), 
-      speed: getSpeed(getFishType(i), i), 
-      type: getFishType(i),
-      geometry: getGeometry(getFishType(i)),
-      material: getMaterial(getFishType(i)),
-      scaleFactor: scaleFactor(getFishType(i)),
-      rotationFactor: rotationFactor(getFishType(i))
-    }
-  );
+  fishObj[i] = {
+    x: Math.random() * 400, 
+    y: generateStartingPosition(), 
+    speed: getSpeed(getFishType(i), i), 
+    type: getFishType(i),
+    geometry: getGeometry(getFishType(i)),
+    material: getMaterial(getFishType(i)),
+    scaleFactor: scaleFactor(getFishType(i)),
+    rotationFactor: rotationFactor(getFishType(i))
+  }
   
 }
 
+for (let i = 0; i < pointCount; i++) {
+  // x: i * 400,
+  room.send("createFish", { 
+    id: i, 
+    speed: getSpeed(getFishType(i), i)
+  })
+  
+}
 // state stuff 
 // room props for fish
 const [fish, setPosition] = useState(fishObj);
-
+/*
 useEffect(() => {
   // Using an IIFE
   (async function anyNameFunction() {
@@ -144,7 +150,7 @@ useEffect(() => {
   })();
 
 },[]);
-
+*/
 useFrame(({mouse}) => {
 
   let fishObj_ = {};
