@@ -13,6 +13,12 @@ function ChatRoom(props) {
     const [client, setClient] = useState();
     const [room, setRoom]  = useState(null)
 
+    const sendMessage = (text, time) => {
+        console.log('sending message to server')
+        console.log(text);   
+        room.send("chat-send", text);
+    }
+
     //establish colyseus connection
     useEffect(() => {
         async function configureColyseus () {
@@ -44,7 +50,7 @@ function ChatRoom(props) {
         <div className="containerchat">
             <Title title={props.identifier}/>
             <MessageList messages={messages}/>
-            <SendMessageForm/>
+            <SendMessageForm onSubmit={sendMessage}/>
         </div>
     )
 }
