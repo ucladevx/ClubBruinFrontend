@@ -10,8 +10,10 @@
 //prototype: just make a bunch of fake sample chat rooms that a user
 //can enter and type in
 
-import React, {useState} from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import NewRoomForm from './NewRoomForm'
+import { UsernameContext } from '../../UsernameContext'
+import axios from 'axios'
 
 function RoomsList(props) {
 
@@ -23,23 +25,50 @@ function RoomsList(props) {
     }
     */
 
-    const [chatIDs, setChatIDs] = useState(['Public', 'Other'])
+    const { user } = useContext(UsernameContext)
+
+    // ChatID -> { roomName, roomID }
+    const [chatIDs, setChatIDs] = useState([
+        {
+            roomName: 'Public', roomID: '6040c127f3763d405f8cb620'
+            // roomName: 'Other', roomID: '6040c127f3763d405f8cb620'
+        }
+    ])
 
     const setChatIDto = (chatID) => {
         console.log(chatID)
         props.currentChat(chatID)
-        
+
     }
 
     const addRoom = (chatID) => {
         setChatIDs([...chatIDs, chatID])
     }
 
+    useEffect(async () => {
+        const response = await axios({
+            method: 'POST',
+            url: 'http://localhost:9000/chat/getUserChats',
+            data: {
+                "username": user //boop on refresh
+            }
+        })
+        console.log(response.data)
+        response.data.forEach(chatRoom => {
+            console.log(chatRoom._id, chatRoom.chatName)
+            addRoom({
+                roomName: chatRoom.chatName,
+                roomID: chatRoom._id
+            })
+        })
+    }, [])
+
     return (
         <div>
-            {chatIDs.map((chatID, index) => {
+            {chatIDs.map((chatRoom) => {
+                console.log(chatRoom.roomID, chatRoom.roomName)
                 return (
-                    <button onClick={() => setChatIDto(chatID)} key={index}>{chatID}</button>
+                    <button onClick={() => setChatIDto(chatRoom)} key={chatRoom.roomID}>{chatRoom.roomName}</button>
                 )
             })}
             <NewRoomForm onSubmit={addRoom} />

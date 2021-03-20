@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import * as THREE from 'three';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { Canvas, useFrame, useLoader } from 'react-three-fiber'
-import {Flex, Box} from 'react-three-flex'
+import { Flex, Box } from 'react-three-flex'
 import walk1 from '../../Sprites/walk1.png'
 import { HTML, HTMLProps } from 'drei';
 import Location from './Location';
@@ -20,15 +20,15 @@ export default function PlayerAlt(props) {
   const isMoving = useRef([]);
   const [playerPosition, setPlayerPosition] = useState();
   const [players, setPlayers] = useState({
-  
+
   });
 
   // console.log(players)
 
   // state for if a player is at a location
   const [hovered, setHovered] = useState(false);
-  const [atBorder, setAtBorder] = useState(false); 
-  
+  const [atBorder, setAtBorder] = useState(false);
+
   const location = useContext(PositionContext);
 
   useEffect(async () => {
@@ -36,68 +36,69 @@ export default function PlayerAlt(props) {
     let c = new Colyseus.Client("ws://localhost:9000");
     setClient(c);
     var room;
-    
+
     c.joinOrCreate("map", {
-      username: props.username
+      username: props.username,
+      accessToken: sessionStorage.getItem("loginToken")
     }).then(room_instance => {
-        // console.log(room_instance.state.players);
+      // console.log(room_instance.state.players);
 
-        room = room_instance;
+      room = room_instance;
 
-        room.state.players.onAdd = function (player, sessionId) {
-          // console.log('player', player)
-          setPlayers((p)=>({
+      room.state.players.onAdd = function (player, sessionId) {
+        // console.log('player', player)
+        setPlayers((p) => ({
+          ...p,
+          [player.username]: {
+            x: player.x,
+            y: player.y,
+          }
+        }));
+        player.onChange = function (changes) {
+          // console.log('plyer update', player.username)
+          setPlayers((p) => ({
             ...p,
-            [player.username] : {
+            [player.username]: {
               x: player.x,
               y: player.y,
             }
           }));
-          player.onChange = function (changes) {
-            // console.log('plyer update', player.username)
-            setPlayers((p)=>({
-              ...p,
-              [player.username] : {
-                x: player.x,
-                y: player.y,
-              }
-            }));
-          }
         }
+      }
 
-        room.state.players.onRemove = function (player, sessionId) {
-          setPlayers(p => {
+      room.state.players.onRemove = function (player, sessionId) {
+        setPlayers(p => {
+          console.log(p);
+          let obj = {}
+          Object.keys(p).forEach((key) => {
             console.log(p);
-            let obj = {}
-            Object.keys(p).forEach((key) => {
-                console.log(p);
-                if (player.username !== key){
-                  obj[key] = p[key]
-                }
-              })
-            return obj  
+            if (player.username !== key) {
+              obj[key] = p[key]
+            }
           })
+          return obj
+        })
+      }
+
+      window.addEventListener("keydown", function (e) {
+        isMoving.current[e.keyCode] = true;
+        if (isMoving.current[38]) {
+          room.send("move", { y: 1 });
         }
+        else if (isMoving.current[39]) {
+          room.send("move", { x: 1 });
+        }
+        else if (isMoving.current[40]) {
+          room.send("move", { y: -1 });
+        }
+        else if (isMoving.current[37]) {
+          room.send("move", { x: -1 });
+        }
+      })
 
-        window.addEventListener("keydown", function(e) {
-          isMoving.current[e.keyCode] = true;
-          if (isMoving.current[38]) {
-            room.send("move", { y: 1 });
-          }
-          else if (isMoving.current[39]) {
-            room.send("move", { x: 1 });
-          }
-          else if (isMoving.current[40]) {
-            room.send("move", { y: -1 });
-          }
-          else if (isMoving.current[37]) {
-            room.send("move", { x: -1 });
-          }
-        })
-
-        window.addEventListener("keyup", function(e) {
-          delete isMoving.current[e.keyCode];
-        })
+      window.addEventListener("keyup", function (e) {
+        delete isMoving.current[e.keyCode];
+      })
 
     })
   }, [])
@@ -118,23 +119,23 @@ export default function PlayerAlt(props) {
 
     <>
       <Suspense fallback={null}>
-      {
-        // Object.keys(players).map(key =>
-         Object.keys(players).map(key =>
+        {
+          // Object.keys(players).map(key =>
+          Object.keys(players).map(key =>
 
-          <group>
+            <group>
 
-          <HTML position={[players[key].x, players[key].y, 0]}>
-          <p style={{marginLeft: -props.username.length * (props.username.length / 8)}}>{props.username}</p>
-              <img src={walk1} alt="earth" className="character" width={(hovered && key === props.username) ? 100:40}></img>
-        </HTML>
-          </group>
+              <HTML position={[players[key].x, players[key].y, 0]}>
+                <p style={{ marginLeft: -props.username.length * (props.username.length / 8) }}>{props.username}</p>
+                <img src={walk1} alt="earth" className="character" width={(hovered && key === props.username) ? 100 : 40}></img>
+              </HTML>
+            </group>
 
-        )
-      }
+          )
+        }
       </Suspense>
     </>
 
   );
-  
+
 }

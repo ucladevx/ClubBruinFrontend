@@ -1,8 +1,8 @@
-import React, {useRef, useEffect} from 'react';
+import React, { useRef, useEffect } from 'react';
 import Message from './Message';
 
 
-function MessageList(props){
+function MessageList(props) {
 
 
     const ScrollToBottom = () => {
@@ -10,13 +10,14 @@ function MessageList(props){
         useEffect(() => messageEl.current.scrollIntoView());
         return <div ref={messageEl} />;
     }
-    
+
+    console.log(props.messages)
 
     return (
         <div className="message-list">
-            {props.messages.map((message, index) => {
+            {props.messages?.map((message, index) => {
                 return (
-                    <Message key={index} username={message.name} text={message.messages} time={message.timestamp.toString()}/>
+                    <Message key={index} username={message.username} text={message.message} time={(new Date(message.timestamp)).toString()} />
                 );
             })}
             <ScrollToBottom />

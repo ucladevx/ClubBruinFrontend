@@ -81,12 +81,14 @@ function ChatApp(props){
 export default ChatApp;
 */
 
-import React, {useState} from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ChatRoom from './ChatRoom'
 import RoomsList from './RoomsList'
 import './index.css'
+import axios from 'axios'
+import { UsernameContext } from '../../UsernameContext'
 
-function ChatApp(){
+function ChatApp() {
 
   /*
   const [displaySelectedChat, setDisplaySelectedChat] = useState(true)
@@ -102,6 +104,8 @@ function ChatApp(){
 
   const [currentChatID, setCurrentChatID] = useState('')
 
+  const { user } = useContext(UsernameContext)
+
   const backToRoomsList = () => {
     setCurrentChatID('')
     console.log(currentChatID)
@@ -114,18 +118,18 @@ function ChatApp(){
 
 
   const [allChatRooms, setAllChatRooms] = useState([])
-  
+
 
   return (
     <div>
-      {currentChatID?
+      {currentChatID ?
         <div>
           <button onClick={backToRoomsList}>Back</button>
-          <ChatRoom id="6040c127f3763d405f8cb620" identifier={currentChatID}/>
+          <ChatRoom id={currentChatID.roomID} identifier={currentChatID.roomName} /> {/* "6040c127f3763d405f8cb620"*/}
         </div>
-      :
+        :
         <div>
-          <RoomsList currentChat={setCurrentChatIDto}/>
+          <RoomsList currentChat={setCurrentChatIDto} />
         </div>
       }
     </div>
@@ -139,13 +143,13 @@ export default ChatApp;
 2. list messages per chat room
 3. limit calls
 {
-	chat_rooms: [id's],
-	chat_obj:{
-		id: {
-			name, messages
-		}
-	},
-	selected_chat: null/id
+  chat_rooms: [id's],
+  chat_obj:{
+    id: {
+      name, messages
+    }
+  },
+  selected_chat: null/id
 }
 selected_chat ? < BigChat id = selected_chat>  : chat_rooms.map(ChatComponentSmall id = id)
 (ChatComponentSmall id = id

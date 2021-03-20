@@ -1,33 +1,37 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import Title from './Title';
 import connect from 'socket.io-client'
-import {UsernameContext} from '../../UsernameContext'
+import { UsernameContext } from '../../UsernameContext'
 import useSocket from 'use-socket.io-client';
 import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
 
 function ChatRoom(props) {
-    const {user} = useContext(UsernameContext)
+    const { user } = useContext(UsernameContext)
     const [messages, setMessages] = useState([]);
     const [client, setClient] = useState();
-    const [room, setRoom]  = useState(null)
+    const [room, setRoom] = useState(null)
 
     const sendMessage = (text, time) => {
         console.log('sending message to server')
-        console.log(text);   
+        console.log(text);
         room.send("chat-send", text);
+        /*
+        room.send(0, { direction: "left"});
+        */
+        setMessages((msgs) => setMessages([...msgs, { message: text, username: user, timestamp: Date.now() }]))
     }
 
     //establish colyseus connection
     useEffect(() => {
-        async function configureColyseus () {
+        async function configureColyseus() {
             let c = new Colyseus.Client("ws://localhost:9000");
             setClient(c);
 
             await c.joinOrCreate("chat", {
                 username: user,
-                accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imxhc2FueWEiLCJlbWFpbCI6ImdhcmZpZWxkQGcudWNsYS5lZHUiLCJpYXQiOjE2MTQ1NDIxOTksImV4cCI6MTYxNTQwNjE5OX0.fcSUyAI_clMf86PoycZxeHfRWFaIu_bK3wI5sXhmm0A",
+                accessToken: sessionStorage.getItem("loginToken"),
                 chatId: props.id
             }).then(room_instance => {
                 setRoom(room_instance)
@@ -46,11 +50,17 @@ function ChatRoom(props) {
         setMessages(message)
     });
 
+    room?.onMessage("chat-recv", (message) => {
+        console.log("message received from server");
+        console.log(message);
+        setMessages((msgs) => [...msgs, message])
+    });
+
     return (
         <div className="containerchat">
-            <Title title={props.identifier}/>
-            <MessageList messages={messages}/>
-            <SendMessageForm onSubmit={sendMessage}/>
+            <Title title={props.identifier} />
+            <MessageList messages={messages} />
+            <SendMessageForm onSubmit={sendMessage} />
         </div>
     )
 }
