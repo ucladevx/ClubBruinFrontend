@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import Home from './Components/Home'
 import FishGame from './Components/FishGame'
 import Map from './Components/Map'
@@ -14,25 +14,27 @@ import reportWebVitals from './reportWebVitals';
 import Login from './Components/Login'
 import Chat from './Components/ChatApp'
 //import {UsernameContext} from './UsernameContext'
-import {Provider} from './UsernameContext'
+import { Provider } from './UsernameContext'
+import YouTube from './Components/YouTube';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider>
       <Router>
-          <div>
-              <Switch>
-                  {/* <Route exact path="/" component={Home} /> */}
-                  {/* <Route exact path="/login" component={Login} /> */}
-                  
-                  
-                  <Route exact path="/" render = {() => <Provider><Login></Login></Provider>} />
-                  <Route exact path="/chat" render = {() => <Provider><Chat></Chat></Provider>} />
-                  <Route exact path="/map" render = {() => <Provider><Map></Map></Provider>} />
-                  <Route exact path="/fishgame" render = {() => <Provider><FishGame></FishGame></Provider>} />
-                  {/* <Route exact path="/chat" component={Chat} /> */}
-              </Switch>
-          </div>
+        <div>
+          <Switch>
+            {/* <Route exact path="/" component={Home} /> */}
+            {/* <Route exact path="/login" component={Login} /> */}
+
+
+            <Route exact path="/" render={() => <Provider><Login></Login></Provider>} />
+            <Route exact path="/chat" render={() => <Provider><Chat></Chat></Provider>} />
+            <Route exact path="/map" render={() => <Provider><Map></Map></Provider>} />
+            <Route exact path="/fishgame" render={() => <Provider><FishGame></FishGame></Provider>} />
+            <Route exact path="/youtube" render={() => <Provider><YouTube></YouTube></Provider>} />
+            {/* <Route exact path="/chat" component={Chat} /> */}
+          </Switch>
+        </div>
       </Router>
     </Provider>
   </React.StrictMode>,
