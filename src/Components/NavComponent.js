@@ -1,7 +1,7 @@
 import { React, useRef, useState } from 'react';
 import { MdMailOutline, MdSettingsInputSvideo } from "react-icons/md";
 import {CgProfile} from "react-icons/cg"
-import Chat from './ChatApp/Index';
+import Chat from './ChatApp';
 
 import '../App.css'
 
