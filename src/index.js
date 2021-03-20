@@ -22,7 +22,6 @@ ReactDOM.render(
 					<Switch>
 						{/* <Route exact path="/" component={Home} /> */}
 						{/* <Route exact path="/login" component={Login} /> */}
-
 						<Route
 							exact
 							path='/'
@@ -43,20 +42,12 @@ ReactDOM.render(
 						/>
 						<Route
 							exact
-							path='/map'
-							render={() => (
-								<Provider>
-									<Map></Map>
-								</Provider>
-							)}
-						/>
-						<Route
-							exact
-							path='/fishgame'
+							path='/fishgame/:id'
 							render={() => (
 								<Provider>
 									<GenericGame
 										gameType='map'
+										location='lobby'
 										chat={true}
 										webcam={true}
 									>
@@ -65,9 +56,10 @@ ReactDOM.render(
 								</Provider>
 							)}
 						/>
+						{/* <Route exact path="/fishgame" component={Lobby} /> */}
 						<Route
 							exact
-							path='/mapTest'
+							path='/map'
 							render={() => (
 								<Provider>
 									<GenericGame
