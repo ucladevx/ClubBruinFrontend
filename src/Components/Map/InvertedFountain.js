@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import Scene from './Scene';
 import { UsernameContext } from '../../UsernameContext';
 import Draggable from 'react-draggable';
-import Chat from '../ChatApp/Index';
+import Chat from '../ChatApp';
 import { useHistory } from 'react-router-dom';
 import NavComponent from '../NavComponent';
 
-export default function Map(props) {
+export default function InvertedFountain() {
+	const { user } = useContext(UsernameContext);
 	const history = useHistory();
 	return (
 		<div
@@ -15,7 +16,7 @@ export default function Map(props) {
 				overflow: 'none',
 			}}
 		>
-			<Scene username={props.username} room={props.room} />
+			<Scene username={user} />
 			<Draggable
 				// axis="x"
 				handle='.handle'
@@ -30,9 +31,9 @@ export default function Map(props) {
 					}}
 				>
 					{/* <div className="handle" style={{
-              width: '400px',
-              background: 'white'
-            }}>Drag from here</div> */}
+                      width: '400px',
+                      background: 'white'
+                    }}>Drag from here</div> */}
 					{/* <div style={{color: 'white'}}>This readme is really dragging on...</div> */}
 					{/* <Chat/> */}
 				</div>
@@ -50,17 +51,17 @@ export default function Map(props) {
 				<NavComponent />
 			</div>
 			{/* <button style={{
-          position: 'absolute',
-          zIndex: 50,
-          right: 50,
-          bottom: 50,
-          width: 250,
-          height: 100
-        }} onClick={() => {
-          history.push('/fishgame')
-        }}>
-          Play the fish game
-        </button> */}
+                  position: 'absolute',
+                  zIndex: 50,
+                  right: 50,
+                  bottom: 50,
+                  width: 250,
+                  height: 100
+                }} onClick={() => {
+                  history.push('/fishgame')
+                }}>
+                  Play the fish game
+                </button> */}
 
 			<button
 				style={{
@@ -72,10 +73,10 @@ export default function Map(props) {
 					height: 100,
 				}}
 				onClick={() => {
-					history.push('/map/fountain');
+					history.push('/fishgame/lobby');
 				}}
 			>
-				Visit the Inverted Fountain!
+				Play the fish game
 			</button>
 		</div>
 	);

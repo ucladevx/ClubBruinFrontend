@@ -1,5 +1,15 @@
-#canvas {
-	/* background-image: url('../../../src/Images/thequad.png'); */
+#default {
+	/* background-image: url('../../../src/Images/Royce_mockup.svg'); */
+	background-image: url('../../../src/Images/thequad.png');
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#fountain {
+	/* background-image: url('../../../src/Images/Royce_mockup.svg'); */
+	background-image: url('../../../src/Images/InvertedFountain.png');
 	height: 100vh;
 	background-position: center;
 	background-repeat: no-repeat;

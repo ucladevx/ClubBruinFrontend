@@ -13,6 +13,7 @@ import Login from './Components/Login';
 import Chat from './Components/ChatApp/Index';
 //import {UsernameContext} from './UsernameContext'
 import { Provider } from './UsernameContext';
+import InvertedFountain from './Components/Map/InvertedFountain';
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -56,6 +57,16 @@ ReactDOM.render(
 								</Provider>
 							)}
 						/>
+						<Route
+							exact
+							path='/map/fountain'
+							render={() => (
+								<Provider>
+									<InvertedFountain></InvertedFountain>
+								</Provider>
+							)}
+						/>
+
 						{/* <Route exact path="/fishgame" component={Lobby} /> */}
 						<Route
 							exact
