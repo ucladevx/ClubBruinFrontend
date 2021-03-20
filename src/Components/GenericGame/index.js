@@ -46,6 +46,7 @@ export default function GenericGame(props) {
 			await c
 				.joinOrCreate(props.gameType, {
 					username: user,
+					accessToken: sessionStorage.getItem('loginToken'),
 				})
 				.then((room_instance) => {
 					setRoom(room_instance);

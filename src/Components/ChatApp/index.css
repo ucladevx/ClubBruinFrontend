@@ -2,7 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	height: 400px;
-	width: 300px;
+	width: 400px;
 }
 
 .title {
@@ -15,7 +15,7 @@
 	padding: 0;
 	text-align: center;
 	color: black;
-	background-color: lightblue;
+	background-color: rgb(143, 165, 228);
 }
 
 .message {
@@ -32,7 +32,7 @@
 	padding: 4px 8px;
 	border-radius: 8px;
 	color: black;
-	background-color: lightblue;
+	background-color:  rgb(255, 226, 140);
 }
 
 .message-time {
@@ -77,4 +77,8 @@
 
 .send-message-form input::placeholder {
 	color: black;
+}
+
+.invisible {
+	display: none;
 }
