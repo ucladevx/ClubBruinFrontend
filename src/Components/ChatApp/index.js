@@ -81,16 +81,15 @@ function ChatApp(props){
 export default ChatApp;
 */
 
-import React, { useEffect, useState, useContext } from 'react'
-import ChatRoom from './ChatRoom'
-import RoomsList from './RoomsList'
-import './index.css'
-import axios from 'axios'
-import { UsernameContext } from '../../UsernameContext'
+import React, { useEffect, useState, useContext } from 'react';
+import ChatRoom from './ChatRoom';
+import RoomsList from './RoomsList';
+import './index.css';
+import axios from 'axios';
+import { UsernameContext } from '../../UsernameContext';
 
 function ChatApp() {
-
-  /*
+	/*
   const [displaySelectedChat, setDisplaySelectedChat] = useState(true)
 
   const setDisplayFalse = () => {
@@ -102,38 +101,40 @@ function ChatApp() {
   }
   */
 
-  const [currentChatID, setCurrentChatID] = useState('')
+	const [currentChatID, setCurrentChatID] = useState(null);
 
-  const { user } = useContext(UsernameContext)
+	const { user } = useContext(UsernameContext);
 
-  const backToRoomsList = () => {
-    setCurrentChatID('')
-    console.log(currentChatID)
-  }
+	const backToRoomsList = () => {
+		setCurrentChatID('');
+		console.log(currentChatID);
+	};
 
-  const setCurrentChatIDto = (clickedChatID) => {
-    setCurrentChatID(clickedChatID)
-    console.log(currentChatID)
-  }
+	const setCurrentChatIDto = (clickedChatID) => {
+		setCurrentChatID(clickedChatID);
+		console.log('setting' + currentChatID);
+	};
 
+	const [allChatRooms, setAllChatRooms] = useState([]);
 
-  const [allChatRooms, setAllChatRooms] = useState([])
-
-
-  return (
-    <div>
-      {currentChatID ?
-        <div>
-          <button onClick={backToRoomsList}>Back</button>
-          <ChatRoom id={currentChatID.roomID} identifier={currentChatID.roomName} /> {/* "6040c127f3763d405f8cb620"*/}
-        </div>
-        :
-        <div>
-          <RoomsList currentChat={setCurrentChatIDto} />
-        </div>
-      }
-    </div>
-  )
+	return (
+		<div>
+			{currentChatID ? (
+				<div>
+					<button onClick={backToRoomsList}>Back</button>
+					<ChatRoom
+						id={currentChatID.roomID}
+						identifier={currentChatID.roomName}
+					/>{' '}
+					{/* "6040c127f3763d405f8cb620"*/}
+				</div>
+			) : (
+				<div>
+					<RoomsList currentChat={setCurrentChatIDto} />
+				</div>
+			)}
+		</div>
+	);
 }
 
 export default ChatApp;

@@ -24,7 +24,7 @@ function Login(props) {
         setLoggedIn(loggedInBool)
     }
 
-    if (loggedIn) {
+    if (loggedIn || sessionStorage.getItem("loginToken") == "true") {
         history.push('/map')
         // window.location = "/chat"
         return null
@@ -32,30 +32,30 @@ function Login(props) {
 
 
     return (
-        <div className="containerlogin">
-            
-            {/* Right now the "home page" is just text, but I assume later that when the user
-            logs in successfully, they will be taken to an actual home page instead of staying 
-            on the login page */}
 
-            {loggedIn? <div className="header">home</div> :
+        <div>
+            {isSignin?
             
-            <div>
-                <div className="loginContainer">
-                    {isSignin? <Signin helper={loginbool}/> : <Signup />}
-
-                    <div>
-                        {isSignin?
-                        <button className="loginbutton" onClick={clickSignup}>Don't have an account? Sign up!</button> : 
-                        <button className="loginbutton" onClick={clickSignin}>Already have an account? Sign in!</button>}
+                <div className="container-signin">
+                    <div className="login-components">
+                        <img className="logo-image" src="/assets/club_bruin_logo.png" alt="logo"></img>
+                        <Signin helper={loginbool} />
+                        <div className="change-to-signup">Don't have an account?<button className="change-to-signup-button" onClick={clickSignup}>Sign up!</button></div>
                     </div>
+                </div> 
+                
+                :
 
+                <div className="container-signup">
+                    <div className="login-components">
+                        <img className="logo-image" src="/assets/club_bruin_logo.png" alt="logo"></img>
+                        <Signup />
+                        <div className="change-to-signin">Already have an account?<button className="change-to-signin-button" onClick={clickSignin}>Sign in!</button></div>
+                    </div>
                 </div>
-            </div>
-            }
 
-        </div>
-                    
+            }       
+        </div>        
         
     )
 }

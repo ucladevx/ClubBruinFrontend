@@ -18,6 +18,8 @@ function SignupForm(props) {
         setEmail(e.target.value)
     }
 
+
+
     const handleSubmit = e => {
         e.preventDefault()
         // props.helper(username, password, email)
@@ -32,31 +34,31 @@ function SignupForm(props) {
     }
 
     return (
-        <div className="form">
+        <div className="form-signup">
         <form onSubmit={handleSubmit}>
+            username
             <input 
-                className="logininput"
-                placeholder='Enter username'
+                className="input-signup"
                 type='text'
                 onChange={handleUsername}
                 value={username}
             />
+            password
             <input 
-                className="logininput"
-                placeholder='Enter password'
+                className="input-signup"
                 type='text'
                 onChange={handlePassword}
                 value={password}
             />
+            UCLA email address
             <input 
-                className="logininput"
-                placeholder='Enter UCLA email'
+                className="input-signup"
                 text='text'
                 onChange={handleEmail}
                 value={email}
             />
-            <div className="submitButton"> 
-                <button type='submit' className="loginbutton">Sign up</button> 
+            <div className="submit-button"> 
+                <button type='submit' className="login-button">Sign Up</button> 
             </div>
         </form>
         </div>

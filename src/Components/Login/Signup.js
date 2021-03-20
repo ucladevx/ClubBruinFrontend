@@ -4,7 +4,7 @@ import SignupForm from './SignupForm'
 import {UsernameContext} from '../../UsernameContext'
 
 
-function Singup() {
+function Signup() {
     const {setUser} = useContext(UsernameContext)
 
     const [string, setString] = useState('')
@@ -34,7 +34,7 @@ function Singup() {
     return (
         <div>
             <div>
-                <div className="header">Sign Up:</div>
+                <div className="header-signup">Create an Account:</div>
                 <SignupForm helper={fn}/>
                 {string.substring(0, 17)==='Signup successful' || string===''? 
                 <div>{string && <div className="userSuccess">{string}</div>}</div> : 
@@ -45,4 +45,4 @@ function Singup() {
     )
 }
 
-export default Singup
+export default Signup
