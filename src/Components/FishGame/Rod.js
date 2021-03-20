@@ -8,7 +8,7 @@ import hookNoLine from '../../Sprites/hookNoLine.png'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 
-function Rod() {
+function Rod({history}) {
 
   // const limits = window.screen.width / 65
 
@@ -37,7 +37,7 @@ function Rod() {
 
     return (
         <>
-        <Fish x={xPos} y={yPos} pointCount={40}/>
+        <Fish x={xPos} y={yPos} pointCount={40} history = {history}/>
 
         <mesh
           position={[xPos,yPos,1]}

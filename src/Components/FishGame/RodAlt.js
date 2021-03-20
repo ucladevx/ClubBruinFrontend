@@ -11,7 +11,7 @@ import hookNoLine from '../../Sprites/hookNoLine.png'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import * as Colyseus from "colyseus.js";
 
-function RodAlt() {
+function RodAlt({history}) {
 
   // const limits = window.screen.width / 65
 
@@ -99,7 +99,7 @@ function RodAlt() {
   //console.log(player);
   return (
     <>
-    <Fish x={xPos} y={yPos} pointCount={40} room={room}/>
+    <Fish x={xPos} y={yPos} pointCount={40} room={room} history ={history}/>
     
     <mesh
       position={[xPos,yPos,1]}
