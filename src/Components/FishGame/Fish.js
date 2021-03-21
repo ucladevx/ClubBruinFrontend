@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, Suspense } from "react"
-import { useFrame, useLoader } from "react-three-fiber"
+import { useFrame, useLoader, stateContext } from "react-three-fiber"
 import './index.css'
 import * as THREE from 'three';
 import {Html} from 'drei'
@@ -77,16 +77,23 @@ for (let i = 0; i < pointCount; i++) {
   }
     
 }
-/*
-for (let i = 0; i < pointCount; i++) {
-  // x: i * 400,
-  room.send("createFish", { 
-    id: i, 
-    speed: getSpeed(getFish(i), i)
-  })
-  
-}
-*/
+
+useEffect(() => {
+  // Using an IIFE
+  (async function anyNameFunction() { 
+    for (let i = 0; i < pointCount; i++) {
+      // x: i * 400,
+      room.send("createFish", { 
+        id: i, 
+        speed: getSpeed(i)
+      })
+      
+    }  
+  })();
+
+  },[]);
+
+
 const [fish, setPosition] = useState(fishObj);
 
 
@@ -150,8 +157,11 @@ useFrame(({mouse}) => {
 
   let fishObj_ = {};
   let fishOffScreen = 0;
+  
+  room.send("moveFish");
 
   for (let i = 0; i < pointCount; i++) {
+    //room.state.fishes.get(i).
     let speed = fishObj[i].speed;
     let type = fishObj[i].type
     let geometry = fishObj[i].geometry
