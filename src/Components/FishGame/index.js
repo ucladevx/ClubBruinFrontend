@@ -8,11 +8,12 @@ import Rod from './Rod'
 import Loading from '../../Sprites/loading2.gif'
 import './index.css'
 import {useHistory} from 'react-router-dom'
+import Background from '../../Sprites/underwater.gif'
 
 function FishGame() {
   const history = useHistory();
     return (
-      <div className="map">
+      <div className="map" style={{ backgroundImage:"url(" + Background + ")" }}>
       <Canvas camera={{ position: [0, 0, 20] }}>
       <directionalLight position={[10, 10, 5]} intensity={0.5} />
      <directionalLight position={[-10, -10, -5]} intensity={0.5} />

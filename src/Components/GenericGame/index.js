@@ -58,7 +58,7 @@ export default function GenericGame(props) {
 
 	return (
 		<div>
-			{!isJoinedRoom ? <Lobby joinRoom={joinARoom} /> : null}
+			{!isJoinedRoom && props.webcam ? <Lobby joinRoom={joinARoom} /> : null}
 			{/* {props.chat && isJoinedRoom ? <Chat /> : null} */}
 			{props.webcam && isJoinedRoom ? <Webcam /> : null}
 			{isJoinedRoom
