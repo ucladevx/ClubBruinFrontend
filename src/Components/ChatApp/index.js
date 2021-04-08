@@ -1,3 +1,4 @@
+/*
 import React, {useState, useEffect, useContext} from 'react';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
@@ -57,8 +58,10 @@ function ChatApp(props){
   // }, [socket])
 
   const addMessage = message => {
-    socket.emit('chat message', {text: message.text, name: user})
-    setMessages([...messages, {...message, name: user}]);
+    //socket.emit('chat message', {text: message.text, name: user})
+    //setMessages([...messages, {...message, name: user}]);
+    socket.emit('chat message', {text: message.text, name: sessionStorage.getItem("username")})
+    setMessages([...messages, {...message, name: sessionStorage.getItem("username")}]);
   }
 
 
@@ -71,6 +74,85 @@ function ChatApp(props){
 
     </div>
   );
+
+
 }
 
 export default ChatApp;
+*/
+
+import React, { useEffect, useState, useContext } from 'react';
+import ChatRoom from './ChatRoom';
+import RoomsList from './RoomsList';
+import './index.css';
+import axios from 'axios';
+import { UsernameContext } from '../../UsernameContext';
+
+function ChatApp() {
+	/*
+  const [displaySelectedChat, setDisplaySelectedChat] = useState(true)
+
+  const setDisplayFalse = () => {
+    setDisplaySelectedChat(false)
+  }
+
+  const setDisplayTrue = (displayBoolTrue) => {
+    setDisplaySelectedChat(true)
+  }
+  */
+
+	const [currentChatID, setCurrentChatID] = useState(null);
+
+	const { user } = useContext(UsernameContext);
+
+	const backToRoomsList = () => {
+		setCurrentChatID('');
+		console.log(currentChatID);
+	};
+
+	const setCurrentChatIDto = (clickedChatID) => {
+		setCurrentChatID(clickedChatID);
+		console.log('setting' + currentChatID);
+	};
+
+	const [allChatRooms, setAllChatRooms] = useState([]);
+
+	return (
+		<div>
+			{currentChatID ? (
+				<div>
+					<button onClick={backToRoomsList}>Back</button>
+					<ChatRoom
+						id={currentChatID.roomID}
+						identifier={currentChatID.roomName}
+					/>{' '}
+					{/* "6040c127f3763d405f8cb620"*/}
+				</div>
+			) : (
+				<div>
+					<RoomsList currentChat={setCurrentChatIDto} />
+				</div>
+			)}
+		</div>
+	);
+}
+
+export default ChatApp;
+
+/*
+1. lisat of chatrooms
+2. list messages per chat room
+3. limit calls
+{
+  chat_rooms: [id's],
+  chat_obj:{
+    id: {
+      name, messages
+    }
+  },
+  selected_chat: null/id
+}
+selected_chat ? < BigChat id = selected_chat>  : chat_rooms.map(ChatComponentSmall id = id)
+(ChatComponentSmall id = id
+setState( prev => {...prev, selected_chat : id})
+*/

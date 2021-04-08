@@ -23,6 +23,8 @@ function Signin(props) {
             props.helper({
             loggedInBool: true
             })
+            sessionStorage.setItem("loginToken", res.data.token)
+            sessionStorage.setItem("username", res.data.username)
             return res.data.message
         })
         .catch((err) => {
@@ -42,7 +44,7 @@ function Signin(props) {
     return (
         <div>
             <div>
-                <div className="header">Sign In:</div>
+                <div className="header-signin">Login:</div>
                 <SigninForm helper={fn}/>
                 {string.substring(0, 23)==='Successfully logged in.' || string===''? 
                 <div>{string && <div className="userSuccess">{string}</div>}</div> : 

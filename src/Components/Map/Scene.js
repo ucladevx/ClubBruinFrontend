@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, Suspense, useEffect } from 'react';
 import * as THREE from 'three';
 import { Canvas } from 'react-three-fiber';
 import Player from './Player';
@@ -13,36 +13,60 @@ import { Html } from 'drei';
 
 export const PositionContext = React.createContext();
 
-const Scene = ({username}) => {
-    const scene = useRef();
-    const [players, setPlayers] = useState([<Player color={'hotpink'} x_position={0} y_position={0} current_player={true}/>]);
-    const location = {
-        x: 0,
-        y: 0
-    };
+function Scene(props) {
+	const scene = useRef();
+	const [setting, updateSetting] = useState();
 
-    function addPlayers() {
-        // console.log("CLICK!")
-        setPlayers(players.concat(<Player color={'skyblue'} x_position={0.2} y_position={0}/>))
-    }
+	useEffect(() => {
+		if (window.location.pathname === '/map/fountain') {
+			updateSetting('fountain');
+		} else {
+			updateSetting('default');
+		}
+	}, []);
+	const [players, setPlayers] = useState([
+		<Player
+			color={'hotpink'}
+			x_position={0}
+			y_position={0}
+			current_player={true}
+		/>,
+	]);
+	const location = {
+		x: 0,
+		y: 0,
+	};
 
-    return (
-        <scene ref={scene}>
-            {/* <div className="map" onClick={addPlayers}> */}
-                <Canvas id="canvas">
-                    <PositionContext.Provider value={location}>
-                    <Light />
-                    {/* {players} */}
-                    <PlayerAlt current_player={true} username={username}/>
-                    {/* <GroundPlane /> */}
-                    {/* <Background /> */}
-                    {/* <Location /> */}
-                    </PositionContext.Provider>
-                </Canvas>
-                {/* <NavComponent /> */}
-            {/* </div> */}
-        </scene>
-    )
-};
+	function addPlayers() {
+		// console.log("CLICK!")
+		setPlayers(
+			players.concat(
+				<Player color={'skyblue'} x_position={0.2} y_position={0} />
+			)
+		);
+	}
+
+	return (
+		<scene ref={scene}>
+			{/* <div className="map" onClick={addPlayers}> */}
+			<Canvas id={setting}>
+				<PositionContext.Provider value={location}>
+					<Light />
+					{/* {players} */}
+					<PlayerAlt
+						current_player={true}
+						username={props.username}
+						room={props.room}
+					/>
+					{/* <GroundPlane /> */}
+					{/* <Background /> */}
+					{/* <Location /> */}
+				</PositionContext.Provider>
+			</Canvas>
+			{/* <NavComponent /> */}
+			{/* </div> */}
+		</scene>
+	);
+}
 
 export default Scene;

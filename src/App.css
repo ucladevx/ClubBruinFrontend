@@ -105,3 +105,16 @@
 .chatDisplay {
   display: none;
 }
+
+.sizing {
+  position:'absolute'; z-index: 200; margin-left: -25%; background-color:white; display:block; text-align:center; width: 50%; height: 50%;transform: translateY(-50%)
+}
+
+.header {
+  width: 96%;
+  margin-left: 2%;
+  height: 15%;
+  border-radius: 10px;
+  background-color: blue;
+  color: white;
+}
