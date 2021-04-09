@@ -15,7 +15,7 @@ import walk1 from '../../Sprites/walk1.png';
 import { HTML, HTMLProps } from 'drei';
 import Location from './Location';
 import { PositionContext } from './Scene';
-import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
+import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.js';
 // import * as Colyseus from '../../../node_modules/colyseus.js'
 
 export default function PlayerAlt(props) {

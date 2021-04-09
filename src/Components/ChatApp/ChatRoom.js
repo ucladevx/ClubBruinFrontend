@@ -5,7 +5,7 @@ import Title from './Title';
 import connect from 'socket.io-client';
 import { UsernameContext } from '../../UsernameContext';
 import useSocket from 'use-socket.io-client';
-import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
+import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.js';
 
 function ChatRoom(props) {
 	const { user } = useContext(UsernameContext);

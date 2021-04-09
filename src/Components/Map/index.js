@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Scene from './Scene';
 import { UsernameContext } from '../../UsernameContext';
 import Draggable from 'react-draggable';
-import Chat from '../ChatApp/Index';
+import Chat from '../ChatApp';
 import { useHistory } from 'react-router-dom';
 import NavComponent from '../NavComponent';
 

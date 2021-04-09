@@ -4,7 +4,7 @@ import './index.css';
 import Chat from './Chat';
 import Webcam from './Webcam';
 import Lobby from '../Lobby/Lobby';
-import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
+import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.js';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
