@@ -1,21 +1,22 @@
-.containerchat {
+.container-chat {
 	display: flex;
 	flex-direction: column;
 	height: 400px;
-	width: 400px;
+	width: 280px;
 }
 
 .title {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 40px;
+	height: 50px;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	text-align: center;
 	color: black;
 	background-color: rgb(143, 165, 228);
+	border-radius: 15px 15px 0px 0px;
 }
 
 .message {
@@ -52,23 +53,21 @@
 }
 
 .send-message-form {
-	/*position: fixed;
-  bottom: 0px;*/
 	width: 100%;
 	display: flex;
 	box-sizing: border-box;
-	height: 60px;
-	background-color: rgb(216, 216, 216);
+	height: 40px;
 }
 
 .send-message-form input {
 	width: 100%;
 	padding: 15px 10px;
-	border: none;
-	margin: 0;
-	background: rgb(216, 216, 216);
+	margin: 0px 10px 0px 0px;
+	background-color: rgb(250, 250, 250);
 	color: black;
 	font-weight: 200;
+	border: 2px solid rgb(210, 210, 210);
+	border-radius: 20px;
 }
 
 .send-message-form input:focus {
@@ -79,6 +78,78 @@
 	color: black;
 }
 
+.send-message-button {
+	background-color: rgb(143, 165, 228);
+	border-style: none;
+	border-radius: 50px;
+	width: 70px;
+}
+
 .invisible {
 	display: none;
+}
+
+
+.chat-app{
+	background: white;
+	margin: 10px 0px;
+	border-radius: 15px;
+	padding: 10px;
+}
+
+.chat-name-button {
+	background-color:rgb(255, 226, 140);
+	width: 100%;
+	border-style: none;
+	border-radius: 20px;
+	height: 40px;
+	text-align: left;
+	padding: 0px 20px;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.new-room-form {
+	display: flex;
+	flex-direction: column;
+	font-size: 18px;
+}
+
+.new-room-form-section {
+	margin: 5px 0px;
+}
+
+.new-room-form-section input {
+	background-color:rgb(250, 250, 250);
+	color: black;
+	margin: 3px 0px;
+	width: 240px;
+	height: 30px;
+	border: 2px solid rgb(210, 210, 210);
+	border-radius: 20px;
+	padding: 0px 15px;
+}
+
+.new-room-form-section input::placeholder {
+	color: black;
+}
+
+.create-new-room-button {
+	margin-top: 5px;
+	height: 30px;
+	background-color:rgb(143, 165, 228);
+	border-radius: 20px;
+	border-style: none;
+	font-size: 18px;
+}
+
+.back-button{
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+	border-radius: 30px;
+	background-color:rgb(250, 250, 250);
+	border: 2px solid rgb(210, 210, 210);
+	font-size: 20px;
 }

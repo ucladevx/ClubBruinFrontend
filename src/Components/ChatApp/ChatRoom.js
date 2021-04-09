@@ -65,7 +65,7 @@ function ChatRoom(props) {
 	});
 
 	return (
-		<div className='containerchat'>
+		<div className='container-chat'>
 			<Title title={props.identifier} />
 			<MessageList messages={messages} />
 			<SendMessageForm onSubmit={sendMessage} />

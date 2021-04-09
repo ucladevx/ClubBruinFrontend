@@ -10,7 +10,7 @@ import {useHistory} from 'react-router-dom'
 import { PlainAnimator } from "three-plain-animator/lib/plain-animator";
 // import Nemo from '../../Sprites/Fish/nemo.gif'
 // import NemoVid from '../../Sprites/Fish/nemo.mp4'
-import GifLoader from 'three-gif-loader';
+//import GifLoader from 'three-gif-loader';
 import Yellow from '../../Sprites/Fish/yellow.png'
 import Grey from '../../Sprites/Fish/grey.png'
 import Swordfish from '../../Sprites/Fish/swordfish.png'

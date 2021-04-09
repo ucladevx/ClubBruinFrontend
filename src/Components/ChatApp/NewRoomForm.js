@@ -44,25 +44,25 @@ function NewRoomForm(props) {
 
     return (
         <form className="new-room-form" onSubmit={handleSubmit}>
-            <label>Group Chat Name:
+            <label className="new-room-form-section">Group Chat Name:
              <input
-                    placeholder="chatroom"
+                    placeholder="Type chatroom"
                     type='text'
                     onChange={handleChange}
                     value={chatroomName}
                 />
             </label>
-            <label>
+            <label className="new-room-form-section">
                 Participant Name:
                  <input
-                    placeholder="participant"
+                    placeholder="Type participant"
                     type='text'
                     onChange={handleParticipantChange}
                     value={participant}
                 />
             </label>
 
-            <button>Create</button>
+            <button className="create-new-room-button">Create</button>
         </form>
     )
 }

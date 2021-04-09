@@ -118,10 +118,10 @@ function ChatApp() {
 	const [allChatRooms, setAllChatRooms] = useState([]);
 
 	return (
-		<div>
+		<div className="chat-app">
 			{currentChatID ? (
 				<div>
-					<button onClick={backToRoomsList}>Back</button>
+					<button className="back-button" onClick={backToRoomsList}>&lt;</button>
 					<ChatRoom
 						id={currentChatID.roomID}
 						identifier={currentChatID.roomName}

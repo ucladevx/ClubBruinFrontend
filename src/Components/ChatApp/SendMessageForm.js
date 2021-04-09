@@ -26,7 +26,7 @@ function SendMessageForm(props) {
                 value={message}
                 disabled={props.disabled}
             />
-            <button>Send</button>
+            <button className="send-message-button">Send</button>
         </form>
     );
 

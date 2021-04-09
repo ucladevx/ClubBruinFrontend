@@ -95,7 +95,7 @@ function RoomsList(props) {
 			{chatIDs.map((chatRoom) => {
 				console.log(chatRoom, chatRoom.roomName, chatIDs.length);
 				return (
-					<button
+					<button className="chat-name-button"
 						onClick={() => setChatIDto(chatRoom)}
 						key={chatRoom.roomID}
 					>
