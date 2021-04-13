@@ -25,6 +25,8 @@
     width: 90%;
     margin: 0 auto;
     border-bottom: gray 1px solid;
+    color: black;
+    text-decoration: none;
 }
     .container-entry:last-child {
         border-bottom: none;
@@ -43,6 +45,11 @@
         font-size: 20px;
     }
 
+    .active {
+        cursor: default !important;
+        opacity: 0.5 !important;
+    }
+    
 
 .arrow-down {
     width: 0; 

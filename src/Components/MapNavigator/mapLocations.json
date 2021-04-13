@@ -1,0 +1,12 @@
+[
+    {
+        "name":"Dickson Plaza",
+        "icon": "",
+        "route": "/map"
+    },
+    {
+        "name": "Inverted Fountain",
+        "icon": "",
+        "route": "/map/fountain"
+    }
+]
