@@ -7,16 +7,34 @@
 
 .title {
 	display: flex;
-	justify-content: center;
+	/*justify-content: center;*/
 	align-items: center;
 	height: 50px;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	text-align: center;
-	color: black;
 	background-color: rgb(143, 165, 228);
 	border-radius: 15px 15px 0px 0px;
+	min-width: 0;
+}
+
+.title-text {
+	font-size: 30px;
+	font-weight: bold;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.back-button-placeholder {
+	width: 30px;
+	height: 30px;
+	margin: 0px 15px 0px 10px;
+	border-radius: 30px;
+	background-color:rgb(250, 250, 250);
+	border: 2px solid rgb(210, 210, 210);
+	font-size: 20px;
 }
 
 .message {
@@ -25,7 +43,7 @@
 
 .message-username {
 	padding: 4px;
-	color: blue;
+	color:rgb(0, 29, 110) ;
 }
 
 .message-text {
@@ -95,6 +113,8 @@
 	margin: 10px 0px;
 	border-radius: 15px;
 	padding: 10px;
+	overflow-y: auto;
+	max-height: 400px;
 }
 
 .chat-name-button {

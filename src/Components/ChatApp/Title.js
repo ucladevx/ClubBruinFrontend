@@ -6,7 +6,8 @@ function Title(props) {
     
     return (
         <div className="title">
-            <h1>{props.title}</h1>
+            <button className="back-button-placeholder">&gt;</button>
+            <div className="title-text">{props.title}</div>
         </div>
     );
 }
