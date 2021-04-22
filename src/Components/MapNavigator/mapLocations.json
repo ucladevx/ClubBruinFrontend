@@ -1,12 +1,12 @@
 [
     {
         "name":"Dickson Plaza",
-        "icon": "",
+        "icon": "GiBookCover",
         "route": "/map"
     },
     {
         "name": "Inverted Fountain",
-        "icon": "",
+        "icon": "GiFountain",
         "route": "/map/fountain"
     }
 ]
