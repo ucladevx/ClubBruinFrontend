@@ -9,6 +9,11 @@ import NavComponent from '../NavComponent';
 export default function InvertedFountain() {
 	const { user } = useContext(UsernameContext);
 	const history = useHistory();
+
+	function move() {
+		console.log("WE ARE HERE!!!")
+	}
+
 	return (
 		<div
 			className='map'
@@ -73,7 +78,7 @@ export default function InvertedFountain() {
 					height: 100,
 				}}
 				onClick={() => {
-					history.push('/fishgame/lobby');
+					history.push({pathname:'/fishgame/lobby', state: {move:move()}});
 				}}
 			>
 				Play the fish game

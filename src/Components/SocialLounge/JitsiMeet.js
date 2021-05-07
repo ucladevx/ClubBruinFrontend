@@ -3,7 +3,7 @@ import './index.css'
 
 export default function JitsiMeet (props) {
     const [jitsi, setJitsi] = React.useState({});
-
+    const closeButton = document.getElementById("closePageExit15");
     const loadJitsiScript = () => {
         let resolveLoadJitsiScriptPromise = null;
 
@@ -16,10 +16,11 @@ export default function JitsiMeet (props) {
         script.async = true;
         script.onload = () => resolveLoadJitsiScriptPromise(true);
         document.body.appendChild(script);
-
+    
         return loadJitsiScriptPromise;
     };
-    
+       
+
     const initialiseJitsi = async () => {
         if (!window.JitsiMeetExternalAPI) {
             await loadJitsiScript();
@@ -29,14 +30,17 @@ export default function JitsiMeet (props) {
             parentNode: document.getElementById("jitsi-container"),
             roomName: props.meetingID,
         });
+        _jitsi.on("readyToClose", () => {window.location.pathname = "/sociallounge"});
         setJitsi(_jitsi);
     };
 
     useEffect (() => {
         initialiseJitsi();
 
+
         return () => jitsi?.dispose?.();
     }, [])
+
 
     return (
         <div id="jitsi-container">

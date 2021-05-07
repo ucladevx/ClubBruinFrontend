@@ -3,7 +3,7 @@ html {
 }
 
 .map {
-  background-image: url('/src/Sprites/underwater.gif');
+  /* background-image: url('/src/Sprites/underwater.gif'); */
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;

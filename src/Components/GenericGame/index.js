@@ -8,10 +8,16 @@ import Launcher from './Launcher';
 import * as Colyseus from '../../../node_modules/colyseus.js/dist/colyseus.dev.js';
 import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import JitsiMeet from '../SocialLounge/JitsiMeet'
 
 export default function GenericGame(props) {
+	const [meetingID, setmeetingID] = useState("");
+    const [jitsi, setJitsi] = useState(false)
+
 	let history = useHistory();
 	let location = useLocation();
+
+	console.log(props.game);
 
 	const { user } = useContext(UsernameContext);
 	const [client, setClient] = useState();
@@ -21,6 +27,10 @@ export default function GenericGame(props) {
 	function joinARoom(chosenRoom) {
 		joinRoom(true);
 		history.push('/fishgame/' + chosenRoom.id);
+	}
+
+	function joinASocialRoom() {
+		history.push({pathname:'/sociallounge/something'});
 	}
 
 	// we want the lobby to reload if the user goes back
@@ -59,7 +69,8 @@ export default function GenericGame(props) {
 
 	return (
 		<div>
-			{!isJoinedRoom ? <Lobby joinRoom={joinARoom} /> : null}
+			{!isJoinedRoom && props.game==='fish' ? <Lobby joinRoom={joinARoom}/> : null}
+			{!isJoinedRoom && props.game==='lounge' ? <Lobby joinRoom={joinASocialRoom} /> : null}
 			{/* {props.chat && isJoinedRoom ? <Chat /> : null} */}
 			{props.webcam && isJoinedRoom ? <Webcam /> : null}
 			{isJoinedRoom

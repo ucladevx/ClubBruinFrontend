@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import JitsiMeet from './JitsiMeet'
+import LoungeMap from './LoungeMap'
 import './index.css'
 
 export default function SocialLounge (props) {
@@ -8,7 +9,12 @@ export default function SocialLounge (props) {
 
     return (
         <>
-            {
+        {
+            <div>
+                <LoungeMap />
+            </div>
+        }
+            {/* {
             jitsi ? 
             <JitsiMeet meetingID={meetingID}/>
             :
@@ -19,7 +25,7 @@ export default function SocialLounge (props) {
                     <button className="start-button" type="submit">Start Meeting</button>
                     </form>
             </div>
-            }
+            } */}
         </>
     )
 }

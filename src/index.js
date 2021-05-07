@@ -15,6 +15,7 @@ import SocialLounge from './Components/SocialLounge'
 //import {UsernameContext} from './UsernameContext'
 import { Provider } from './UsernameContext';
 import InvertedFountain from './Components/Map/InvertedFountain';
+import JitsiDisplay from './Components/SocialLounge/JitsiDisplay'
 
 ReactDOM.render(
 	<React.StrictMode>
@@ -49,6 +50,7 @@ ReactDOM.render(
 								<Provider>
 									<GenericGame
 										gameType='map'
+										game="fish"
 										location='lobby'
 										chat={true}
 										webcam={true}
@@ -68,7 +70,26 @@ ReactDOM.render(
 							)}
 						/>
 
+						<Route
+						exact
+						path="/sociallounge/lobby"
+						render={() => (
+							<Provider>
+									<GenericGame
+										gameType='map'
+										location='lobby'
+										game="lounge"
+										chat={true}
+										webcam={true}
+									>
+										<FishGame></FishGame>
+									</GenericGame>
+							</Provider>
+						)}
+						></Route>
+
           <Route exact path="/sociallounge" render = {() => <Provider><SocialLounge></SocialLounge></Provider>} />
+		  <Route exact path="/sociallounge/something" render = {() => <Provider><JitsiDisplay></JitsiDisplay></Provider>} />
 
 						{/* <Route exact path="/fishgame" component={Lobby} /> */}
 						<Route
